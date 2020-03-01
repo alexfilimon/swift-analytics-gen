@@ -8,6 +8,7 @@
 import Foundation
 import GoogleService
 import Core
+import Models
 
 final class SpreadsheetCustomEnumParser {
 

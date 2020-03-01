@@ -10,6 +10,7 @@ import Dispatch
 import PathKit
 import Swifter
 import Core
+import Models
 
 /// Class for authorizing through google OAuth 2.0
 public final class GoogleTokenProvider: TokenProvider {

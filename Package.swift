@@ -26,19 +26,22 @@ let package = Package(
     targets: [
         .target(
             name: "AnalyticsGen",
-            dependencies: ["Core", "GoogleTokenProvider", "GoogleService", "Parsers", "Commander", "PathKit", "Stencil", "Yams", "Rainbow"]),
+            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService", "Parsers", "Commander", "PathKit", "Stencil", "Yams", "Rainbow"]),
         .target(
             name: "Parsers",
-            dependencies: ["Core", "GoogleTokenProvider", "GoogleService"]),
+            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService"]),
         .target(
             name: "GoogleService",
-            dependencies: ["Core", "GoogleTokenProvider"]),
+            dependencies: ["Models", "Core", "GoogleTokenProvider"]),
         .target(
             name: "GoogleTokenProvider",
-            dependencies: ["Core", "PathKit", "Swifter"]),
+            dependencies: ["Models", "Core", "PathKit", "Swifter"]),
         .target(
             name: "Core",
-            dependencies: ["PathKit"]),
+            dependencies: ["Models", "PathKit"]),
+        .target(
+            name: "Models",
+            dependencies: []),
         .testTarget(
             name: "AnalyticsGenTests",
             dependencies: ["AnalyticsGen"]),

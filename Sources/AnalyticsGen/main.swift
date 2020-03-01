@@ -5,6 +5,7 @@ import GoogleTokenProvider
 import GoogleService
 import Foundation
 import Core
+import Models
 
 let baseFolder = Path("/Users/alexfilimon/SPM/AnalyticsGen/")
 let nameConfig = NamingConfig(categoryNamePostfix: "Category",

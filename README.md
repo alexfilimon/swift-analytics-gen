@@ -1,8 +1,17 @@
-# Project for generating files with analytics classes
+# Project for generating analytics layer in mobile app
 
-## Modules
+The script written in swift is used to automatically generate the analytics layer for mobile application (both iOS and android).
 
-1. **Core** - contains base models and classes
-2. **GoogleTokenProvider** - realization Google OAuth 2.0 authorization
-3. **GoogleService** - services for working with google API
-4. **AnalyticsGen** - main module for interacting with user
+## Modularity
+
+![Modularity diagram](Resources/Modularity.png)
+
+## Base architecture
+
+![architecture diagram](Resources/BaseClassDiagram.png)
+
+## GoogleTokenProvider
+
+Provider for authorizing user via google with Google OAuth 2.0
+
+![Provider diagram](Resources/GoogleTokenProviderDiagram.png)

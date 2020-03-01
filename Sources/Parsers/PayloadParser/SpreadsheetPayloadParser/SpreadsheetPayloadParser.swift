@@ -10,6 +10,7 @@ import GoogleTokenProvider
 import GoogleService
 import Core
 import PathKit
+import Models
 
 public final class SpreadsheetPayloadParser: PayloadParser {
 

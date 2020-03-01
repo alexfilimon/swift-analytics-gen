@@ -8,6 +8,7 @@
 import Foundation
 import GoogleTokenProvider
 import Core
+import Models
 
 /// Class for communicating with google spreadsheet api
 public final class GoogleSpreadsheetService {

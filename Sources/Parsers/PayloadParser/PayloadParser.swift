@@ -7,6 +7,7 @@
 
 import Foundation
 import Core
+import Models
 
 public protocol PayloadParser {
     func getPayload() throws -> Payload
