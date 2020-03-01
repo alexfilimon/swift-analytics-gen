@@ -10,6 +10,7 @@ let package = Package(
     ],
     products: [
         .executable(name: "AnalyticsGen", targets: ["AnalyticsGen"]),
+        .library(name: "Parsers", targets: ["Parsers"]),
         .library(name: "GoogleService", targets: ["GoogleService"]),
         .library(name: "GoogleTokenProvider", targets: ["GoogleTokenProvider"]),
         .library(name: "Core", targets: ["Core"]),
@@ -25,7 +26,10 @@ let package = Package(
     targets: [
         .target(
             name: "AnalyticsGen",
-            dependencies: ["Core", "GoogleTokenProvider", "GoogleService", "Commander", "PathKit", "Stencil", "Yams", "Rainbow"]),
+            dependencies: ["Core", "GoogleTokenProvider", "GoogleService", "Parsers", "Commander", "PathKit", "Stencil", "Yams", "Rainbow"]),
+        .target(
+            name: "Parsers",
+            dependencies: ["Core", "GoogleTokenProvider", "GoogleService"]),
         .target(
             name: "GoogleService",
             dependencies: ["Core", "GoogleTokenProvider"]),

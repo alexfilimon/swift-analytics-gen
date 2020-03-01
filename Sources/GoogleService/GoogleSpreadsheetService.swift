@@ -31,10 +31,11 @@ public final class GoogleSpreadsheetService {
     ///   - spreadSheetId: identifier of spreadsheet
     ///   - pageId: page identifier (page name, must be without spaces)
     ///   - range: range in page
-    public func getGoogleSheetData(spreadSheetId: String,
-                                   pageId: String,
-                                   range: String) throws -> SpreadSheetEntry {
-        let urlString = "https://sheets.googleapis.com/v4/spreadsheets/\(spreadSheetId)/values/\(pageId)!\(range)"
+    public func getGoogleSheetData(spreadsheetConfig: SpreadsheetConfig) throws -> SpreadSheetEntry {
+        let id = spreadsheetConfig.id
+        let pageName = spreadsheetConfig.pageName
+        let range = spreadsheetConfig.range
+        let urlString = "https://sheets.googleapis.com/v4/spreadsheets/\(id)/values/\(pageName)!\(range)"
         return try session.performRequest(urlString: urlString, method: .get)
     }
 

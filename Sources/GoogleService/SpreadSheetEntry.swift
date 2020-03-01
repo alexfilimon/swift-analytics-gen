@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SpreadSheetEntry: Decodable {
-    let range: String
-    let majorDimension: String
-    let values: [[String]]
+    public let range: String
+    public let majorDimension: String
+    public let values: [[String]]
 }

@@ -1,0 +1,16 @@
+{% if description %}/// Описание: {{ description }}{% endif %}
+public enum {{ name }}EventsCategory {
+
+    // MARK: - Static Methods
+    {% for event in events %}
+    {% if event.description %}/// Описание:  {{ event.description }}{% endif %}
+    {% if event.params %}/// Параметры: {% for param in event.params %}
+    /// - {{ param.name }}{% if param.description %} - {{ param.description }}{% endif %}{% endfor %}
+    {% endif %}static func {{ event.name }}({% if event.params %}{% for param in event.params %}{{ param.name }}: {{ param.type }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}) {
+        return BaseEvent(
+            name: event.name,
+            params: [{% for param in event.params %}{{ param.rawName }}: {{ param.name }}{% if not forloop.last %},{% endif %}{% endfor %}] as [String: Any]
+        )
+    }
+    {% endfor %}
+}
