@@ -87,7 +87,7 @@ final class SpreadsheetEventsParser {
                     parameter = nil
                 }
                 parameter = .init(name: currentParameterName,
-                                  description: currentEventDescription,
+                                  description: currentParameterDescription,
                                   type: .init(raw: currentParameterType))
             }
 

@@ -4,12 +4,12 @@ public enum {{ name }}EventsCategory {
     // MARK: - Static Methods
     {% for event in events %}
     {% if event.description %}/// Описание:  {{ event.description }}{% endif %}
-    {% if event.params %}/// Параметры: {% for param in event.params %}
-    /// - {{ param.name }}{% if param.description %} - {{ param.description }}{% endif %}{% endfor %}
-    {% endif %}static func {{ event.name }}({% if event.params %}{% for param in event.params %}{{ param.name }}: {{ param.type }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}) {
+    {% if event.parameters %}/// Параметры: {% for parameter in event.parameters %}
+    /// - {{ parameter.name }}{% if parameter.description %} - {{ parameter.description }}{% endif %}{% endfor %}
+    {% endif %}static func {{ event.name }}({% if event.parameters %}{% for parameter in event.parameters %}{{ parameter.name }}: {{ parameter.type }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}) {
         return BaseEvent(
-            name: event.name,
-            params: [{% for param in event.params %}{{ param.rawName }}: {{ param.name }}{% if not forloop.last %},{% endif %}{% endfor %}] as [String: Any]
+            name: {{ event.name }},
+            params: [{% for parameter in event.parameters %}{{ parameter.name }}: {{ parameter.type }}{% if not forloop.last %}, {% endif %}{% endfor %}] as [String: Any]
         )
     }
     {% endfor %}

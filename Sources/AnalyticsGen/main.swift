@@ -26,6 +26,18 @@ let config = Config(namingConfig: nameConfig,
 
 do {
     let payload = try SpreadsheetPayloadParser(config: config).getPayload()
+    let contextGenerator = ContextGenerator(config: config, payload: payload)
+
+    // generating files
+    try contextGenerator.generate().forEach {
+        print("----------------------------------------------------------------")
+        print("Start generating \($0.filePath)".yellow)
+        try FileGenerator(context: $0, config: config).generate()
+        print("Success generated \($0.filePath)".green)
+        print("----------------------------------------------------------------")
+        print("")
+    }
+
     print()
 } catch {
     print("ERROR".red.bold)
