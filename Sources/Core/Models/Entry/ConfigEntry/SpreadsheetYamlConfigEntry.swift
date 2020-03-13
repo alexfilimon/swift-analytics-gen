@@ -5,12 +5,10 @@
 //  Created by Alexander Filimonov on 12/03/2020.
 //
 
-import Foundation
-
-public struct SpreadsheetYamlConfigEntry: Codable {
-    public let id: String
-    public let page_name: String
-    public let range: String
+struct SpreadsheetYamlConfigEntry: Codable {
+    let id: String
+    let page_name: String
+    let range: String
 }
 
 extension SpreadsheetYamlConfigEntry: EntityEncodable {

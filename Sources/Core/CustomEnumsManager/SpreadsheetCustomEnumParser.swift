@@ -12,11 +12,11 @@ final class SpreadsheetCustomEnumParser {
 
     // MARK: - Private Properties
 
-    private let spreadsheet: SpreadSheetEntry
+    private let spreadsheet: Spreadsheet
 
     // MARK: - Initialization
 
-    init(spreadsheet: SpreadSheetEntry) {
+    init(spreadsheet: Spreadsheet) {
         self.spreadsheet = spreadsheet
     }
 

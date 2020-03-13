@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Parameter {
+public struct Parameter: Equatable {
 
     // MARK: - Public Properties
 

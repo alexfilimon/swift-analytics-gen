@@ -52,3 +52,22 @@ public enum ParameterType {
     }
 
 }
+
+extension ParameterType: Equatable {
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.date, .date),
+             (.int, .int),
+             (.double, .double),
+             (.bool, .bool),
+             (.string, .string):
+            return true
+        case (.customEnum(let lhsEnumName), .customEnum(let rhsEnumName)):
+            return lhsEnumName == rhsEnumName
+        default:
+            return false
+        }
+    }
+
+}

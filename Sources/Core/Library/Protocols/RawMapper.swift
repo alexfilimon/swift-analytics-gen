@@ -10,17 +10,20 @@ public class RawMapper<Model>: RawMappable {
     // MARK: - Private Properties
 
     public let model: Model
-    public let config: Config
-    public let payload: Payload
+    public let moduleConfig: ModuleConfig
+    public let baseConfig: BaseConfig
+    public let parameterMapper: ParameterMapper?
 
     // MARK: - Initialization
 
     public init(model: Model,
-                config: Config,
-                payload: Payload) {
+                moduleConfig: ModuleConfig,
+                baseConfig: BaseConfig,
+                parameterMapper: ParameterMapper?) {
         self.model = model
-        self.config = config
-        self.payload = payload
+        self.moduleConfig = moduleConfig
+        self.baseConfig = baseConfig
+        self.parameterMapper = parameterMapper
     }
 
     // MARK: - RawMappable

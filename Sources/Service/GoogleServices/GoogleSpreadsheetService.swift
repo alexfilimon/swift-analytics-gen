@@ -8,9 +8,16 @@
 import Foundation
 import GoogleTokenProvider
 import Connection
+import PathKit
 
 /// Class for communicating with google spreadsheet api
-public final class GoogleSpreadsheetService {
+public final class GoogleSpreadsheetService: GoogleSpreadsheetAbstractService {
+
+    // MARK: - Constants
+
+    private enum Constants {
+        static let authScopes: [String] = ["https://www.googleapis.com/auth/drive"]
+    }
 
     // MARK: - Private Properties
 
@@ -20,18 +27,15 @@ public final class GoogleSpreadsheetService {
 
     /// Base initialization
     /// - Parameter tokenProvider: token provider for authorization
-    public init(tokenProvider: TokenProvider) {
-        self.connection = .init(tokenProvider: tokenProvider)
+    public init(creadentialFilePath: Path) throws {
+        let googleTokenProvider = try GoogleTokenProvider(scopes: Constants.authScopes,
+                                                      credentialFilePath: creadentialFilePath)
+        self.connection = .init(tokenProvider: googleTokenProvider)
     }
 
-    // MARK: - Methods
+    // MARK: - GoogleSpreadsheetAbstractService
 
-    /// Method for getting content in table
-    /// - Parameters:
-    ///   - spreadSheetId: identifier of spreadsheet
-    ///   - pageId: page identifier (page name, must be without spaces)
-    ///   - range: range in page
-    public func getGoogleSheetData(spreadsheetConfig: SpreadsheetRequestEntity) throws -> SpreadSheetEntry {
+    public func getGoogleSheetData(by spreadsheetConfig: SpreadsheetRequestEntity) throws -> SpreadSheetEntry {
         let id = spreadsheetConfig.id
         let pageName = spreadsheetConfig.pageName
         let range = spreadsheetConfig.range

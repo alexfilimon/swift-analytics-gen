@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct EventCategory {
+public struct EventCategory: Equatable {
 
     // MARK: - Public Properties
 

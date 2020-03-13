@@ -5,7 +5,6 @@
 //  Created by Alexander Filimonov on 12/03/2020.
 //
 
-import Foundation
 import Yams
 import PathKit
 
@@ -29,7 +28,7 @@ public final class YamlConfigParser: ConfigParser {
         }
         let configFileContent: String = try configFilePath.read()
         let decoder = YAMLDecoder()
-        let configEntry = try decoder.decode(ConfigYamlEntry.self, from: configFileContent, userInfo: [:])
+        let configEntry = try decoder.decode(ConfigYamlEntry.self, from: configFileContent)
         return try configEntry.toEntity()
     }
     

@@ -5,7 +5,6 @@
 //  Created by Alexander Filimonov on 06/03/2020.
 //
 
-import Foundation
 import PathKit
 
 public struct ModuleConfig {

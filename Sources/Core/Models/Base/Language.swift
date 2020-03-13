@@ -44,6 +44,10 @@ public enum Language {
         }
     }
 
+    public func getFinalName(name: String, needCapitalizeFirst: Bool) -> String {
+        return name.snackToCamel(capitalizingFirst: needCapitalizeFirst)
+    }
+
 }
 
 private enum KotlinTypeDetector {

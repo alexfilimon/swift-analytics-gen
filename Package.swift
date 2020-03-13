@@ -23,29 +23,35 @@ let package = Package(
         .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.4.7")),
         .package(url: "https://github.com/onevcat/Rainbow", from: "3.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.2"),
-        .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.5.0")
+        .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.5.0"),
+        .package(url: "https://github.com/kylef/Spectre.git", from: "0.9.0")
     ],
     targets: [
         .target(
             name: "AnalyticsGen",
-            dependencies: ["Core", "PathKit", "Rainbow", "ArgumentParser", "SPMUtility"]),
+            dependencies: ["Core",
+                           "PathKit","Rainbow", "ArgumentParser", "SPMUtility"]),
         .target(
             name: "Core",
-            dependencies: ["GoogleTokenProvider", "Service", "PathKit", "Yams", "Stencil"]),
+            dependencies: ["Service",
+                           "PathKit", "Yams", "Stencil"]),
         .target(
             name: "Service",
-            dependencies: ["Connection", "GoogleTokenProvider"]),
+            dependencies: ["Connection", "GoogleTokenProvider",
+                           "PathKit"]),
         .target(
             name: "GoogleTokenProvider",
-            dependencies: ["Connection", "FileService", "PathKit", "Swifter"]),
-        .target(
-            name: "Connection",
-            dependencies: []),
+            dependencies: ["Connection", "FileService",
+                           "PathKit", "Swifter"]),
         .target(
             name: "FileService",
             dependencies: ["PathKit"]),
+        .target(
+            name: "Connection",
+            dependencies: []),
         .testTarget(
-            name: "AnalyticsGenTests",
-            dependencies: ["AnalyticsGen"]),
+            name: "CoreTests",
+            dependencies: ["Core",
+                           "Spectre"]),
     ]
 )

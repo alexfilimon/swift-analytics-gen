@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CustomEnumVariant {
+public struct CustomEnumVariant: Equatable {
 
     // MARK: - Public Properties
 

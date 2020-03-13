@@ -13,7 +13,7 @@ public final class EventRawMapper: RawMapper<Event> {
         return [
             "name": model.name.snackToCamel(capitalizingFirst: false),
             "description": model.description as Any,
-            "parameters": try model.parameters.map { try ParameterRawMapper(model: $0, config: config, payload: payload).toRaw() }
+            "parameters": try model.parameters.compactMap { try parameterMapper?.map(parameter: $0) }
         ]
     }
 

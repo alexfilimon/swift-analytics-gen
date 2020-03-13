@@ -13,13 +13,16 @@ public struct Payload {
 
     public let eventsCategories: [EventCategory]
     public let customEnums: [CustomEnum]
+    public let userProperties: [String]
 
     // MARK: - Initialization
 
     public init(eventsCategories: [EventCategory],
-                customEnums: [CustomEnum]) {
+                customEnums: [CustomEnum],
+                userProperties: [String] = []) {
         self.eventsCategories = eventsCategories
         self.customEnums = customEnums
+        self.userProperties = userProperties
     }
 
 }

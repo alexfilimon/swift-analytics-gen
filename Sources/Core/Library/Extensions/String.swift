@@ -26,4 +26,8 @@ public extension String {
         return newComponents.joined()
     }
 
+    func nilIfEmpty() -> String? {
+        return isEmpty ? nil : self
+    }
+
 }
