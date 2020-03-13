@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Models
 
 public final class CustomEnumVariantRawMapper: RawMapper<CustomEnumVariant> {
 

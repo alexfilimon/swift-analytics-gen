@@ -8,10 +8,8 @@
 import Foundation
 import Yams
 import PathKit
-import Models
-import Core
 
-public final class YamlConfigParser {
+public final class YamlConfigParser: ConfigParser {
 
     // MARK: - Private Properties
 

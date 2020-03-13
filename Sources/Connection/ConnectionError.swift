@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SessionError: LocalizedError {
+public enum ConnectionError: LocalizedError {
     case couldntCreateUrl
     case networkError
     case couldntParse

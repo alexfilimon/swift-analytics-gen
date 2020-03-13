@@ -1,11 +1,7 @@
 import PathKit
 import Rainbow
-import Parsers
-import GoogleTokenProvider
-import GoogleService
 import Foundation
 import Core
-import Models
 import ArgumentParser
 import Basic
 import SPMUtility
@@ -15,6 +11,8 @@ extension Path: ExpressibleByArgument {
         self.init(argument)
     }
 }
+
+FileManager.default.changeCurrentDirectoryPath("/Users/alexfilimon/SPM/AnalyticsGen/")
 
 struct Generate: ParsableCommand {
 
@@ -60,7 +58,7 @@ struct Generate: ParsableCommand {
 ////        }
 
         // TODO: just for debugging
-//        FileManager.default.changeCurrentDirectoryPath("/Users/alexfilimon/SPM/AnalyticsGen/")
+//
 
 
 
@@ -68,7 +66,7 @@ struct Generate: ParsableCommand {
 
 
             let config = try YamlConfigParser(configFilePath: configFilePath).parse()
-            let payload = try SpreadsheetPayloadParser(config: config).getPayload()
+            let payload = try SpreadsheetPayloadParser(config: config).parse()
 
             // generating events
             let eventsContextGenerator = EventsCategoriesContextGenerator(config: config, payload: payload)

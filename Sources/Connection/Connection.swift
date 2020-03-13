@@ -1,14 +1,14 @@
 //
-//  Session.swift
+//  Connection.swift
 //  
 //
 //  Created by Alexander Filimonov on 01/03/2020.
 //
 
 import Foundation
-import Rainbow
 
-public final class Session {
+/// Class for connecting to the network (supports requests with accessToken)
+public final class Connection {
 
     // MARK: - Nested Types
 
@@ -25,7 +25,7 @@ public final class Session {
     // MARK: - Initializaion
 
     /// Base initialization
-    /// - Parameter tokenProvider: token provider for authorization if needed
+    /// - Parameter accessToken: access token for auth
     public init(tokenProvider: TokenProvider? = nil) {
         self.tokenProvider = tokenProvider
     }
@@ -41,12 +41,13 @@ public final class Session {
                                              method: Method,
                                              params: [String: String] = [:]) throws -> T {
         guard var urlComponents = URLComponents(string: urlString) else {
-            throw SessionError.couldntCreateUrl
+            throw ConnectionError.couldntCreateUrl
         }
 
         var request = URLRequest(url: urlComponents.url!)
-        if let tokenUnwrapped = try? tokenProvider?.getToken() {
-            request.setValue("\(tokenUnwrapped.tokenType) \(tokenUnwrapped.accessToken)", forHTTPHeaderField: "Authorization")
+        if let tokenProvider = tokenProvider {
+            let token = try tokenProvider.getToken()
+            request.setValue("\(token.tokenType) \(token.accessToken)", forHTTPHeaderField: "Authorization")
         }
         request.httpMethod = method.rawValue
 
@@ -66,7 +67,7 @@ public final class Session {
         }
 
         var responseObj: T?
-        var currentError: SessionError?
+        var currentError: ConnectionError?
 
         let sm = DispatchSemaphore(value: 0)
         let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -75,7 +76,7 @@ public final class Session {
                 let jsonDecoder = JSONDecoder()
                 responseObj = try? jsonDecoder.decode(T.self, from: dataUnwrapped)
                 if responseObj == nil {
-                    currentError = SessionError.couldntParse
+                    currentError = ConnectionError.couldntParse
                 }
             }
             sm.signal()
@@ -87,7 +88,7 @@ public final class Session {
             throw errorUnwrapped
         }
         guard let responseObjUnwrapped = responseObj else {
-            throw SessionError.networkError
+            throw ConnectionError.networkError
         }
         return responseObjUnwrapped
     }

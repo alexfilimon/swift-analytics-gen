@@ -10,13 +10,13 @@ let package = Package(
     ],
     products: [
         .executable(name: "AnalyticsGen", targets: ["AnalyticsGen"]),
-        .library(name: "Parsers", targets: ["Parsers"]),
-        .library(name: "GoogleService", targets: ["GoogleService"]),
+        .library(name: "Service", targets: ["Service"]),
         .library(name: "GoogleTokenProvider", targets: ["GoogleTokenProvider"]),
         .library(name: "Core", targets: ["Core"]),
+        .library(name: "Connection", targets: ["Connection"]),
+        .library(name: "FileService", targets: ["FileService"]),
     ],
     dependencies: [
-//        .package(url: "https://github.com/kylef/Commander.git", from: "0.9.1"),
         .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.1"),
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.1"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "2.0.0"),
@@ -28,23 +28,22 @@ let package = Package(
     targets: [
         .target(
             name: "AnalyticsGen",
-            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService", "Parsers",
-                           "PathKit", "Stencil", "Yams", "Rainbow", "ArgumentParser", "SPMUtility"]),
-        .target(
-            name: "Parsers",
-            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService", "Yams", "PathKit"]),
-        .target(
-            name: "GoogleService",
-            dependencies: ["Models", "Core", "GoogleTokenProvider"]),
-        .target(
-            name: "GoogleTokenProvider",
-            dependencies: ["Models", "Core", "PathKit", "Swifter"]),
+            dependencies: ["Core", "PathKit", "Rainbow", "ArgumentParser", "SPMUtility"]),
         .target(
             name: "Core",
-            dependencies: ["Models", "PathKit"]),
+            dependencies: ["GoogleTokenProvider", "Service", "PathKit", "Yams", "Stencil"]),
         .target(
-            name: "Models",
+            name: "Service",
+            dependencies: ["Connection", "GoogleTokenProvider"]),
+        .target(
+            name: "GoogleTokenProvider",
+            dependencies: ["Connection", "FileService", "PathKit", "Swifter"]),
+        .target(
+            name: "Connection",
             dependencies: []),
+        .target(
+            name: "FileService",
+            dependencies: ["PathKit"]),
         .testTarget(
             name: "AnalyticsGenTests",
             dependencies: ["AnalyticsGen"]),

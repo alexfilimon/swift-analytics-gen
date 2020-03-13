@@ -9,8 +9,8 @@ import Foundation
 import Dispatch
 import PathKit
 import Swifter
-import Core
-import Models
+import Connection
+import FileService
 
 /// Class for authorizing through google OAuth 2.0
 public final class GoogleTokenProvider: TokenProvider {
@@ -155,9 +155,9 @@ private extension GoogleTokenProvider {
             "grant_type": "authorization_code",
             "redirect_uri": Constants.getFullLocalServerUrlString(callbackPath: credentials.callback)
         ]
-        return try Session().performRequest(urlString: credentials.tokenUrl,
-                                            method: .post,
-                                            params: params)
+        return try Connection().performRequest(urlString: credentials.tokenUrl,
+                                               method: .post,
+                                               params: params)
     }
 
     /// Method for refreshing access token
@@ -174,9 +174,9 @@ private extension GoogleTokenProvider {
             "grant_type": "refresh_token",
             "refresh_token": refresh
         ]
-        return try Session().performRequest(urlString: credentials.tokenUrl,
-                                            method: .post,
-                                            params: params)
+        return try Connection().performRequest(urlString: credentials.tokenUrl,
+                                               method: .post,
+                                               params: params)
     }
 
     /// Method for starting local server

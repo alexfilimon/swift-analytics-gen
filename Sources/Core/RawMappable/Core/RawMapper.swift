@@ -5,8 +5,6 @@
 //  Created by Alexander Filimonov on 06/03/2020.
 //
 
-import Models
-
 public class RawMapper<Model>: RawMappable {
 
     // MARK: - Private Properties

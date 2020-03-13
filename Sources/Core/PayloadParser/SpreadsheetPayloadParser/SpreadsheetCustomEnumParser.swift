@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import GoogleService
-import Core
-import Models
+import Service
 
 final class SpreadsheetCustomEnumParser {
 
@@ -29,7 +27,6 @@ final class SpreadsheetCustomEnumParser {
 
         var customEnum: CustomEnum?
         var variant: CustomEnumVariant?
-        var parameter: Parameter?
 
         for row in spreadsheet.values {
             let currentCustomEnumName = row[safe: 0] ?? ""

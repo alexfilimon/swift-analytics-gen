@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import GoogleService
-import Core
-import Models
+import Service
 
 final class SpreadsheetEventsParser {
 
