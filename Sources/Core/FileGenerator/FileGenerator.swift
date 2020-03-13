@@ -15,12 +15,12 @@ public final class FileGenerator {
     // MARK: - Private Properties
 
     private let context: FileContext
-    private let config: Config
+    private let config: ModuleConfig
 
     // MARK: - Initialization
 
     public init(context: FileContext,
-                config: Config) {
+                config: ModuleConfig) {
         self.context = context
         self.config = config
     }
@@ -28,7 +28,10 @@ public final class FileGenerator {
     // MARK: - Public Methods
 
     public func generate() throws {
-        let templateFilePath = config.pathConfig.templateFilePath
+        let templateFilePath = config.templateFilePath
+        guard templateFilePath.isFile else {
+            throw BaseError.fileNotFound(path: templateFilePath)
+        }
         let templateFolder = Path(components: templateFilePath.components.dropLast())
         let templateName = templateFilePath.lastComponent
         let environment = Environment(loader: FileSystemLoader(paths: [templateFolder]))

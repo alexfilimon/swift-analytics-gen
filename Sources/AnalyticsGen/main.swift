@@ -6,41 +6,98 @@ import GoogleService
 import Foundation
 import Core
 import Models
+import ArgumentParser
+import Basic
+import SPMUtility
 
-let baseFolder = Path("/Users/alexfilimon/SPM/AnalyticsGen/")
-let nameConfig = NamingConfig(categoryNamePostfix: "Category",
-                              userPropertyPostfix: "UserProperty")
-let pathConfig = PathConfig(outputFolderPath: baseFolder + .init("output/other/folder"),
-                            templateFilePath: baseFolder + .init("template.stencil"),
-                            credentialsFilePath: baseFolder + .init("google.json"))
-let config = Config(namingConfig: nameConfig,
-                    pathConfig: pathConfig,
-                    language: .swift,
-                    spreadsheedCustomEnumsConfig: .init(id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c",
-                                                        pageName: "Types",
-                                                        range: "A2:G100"),
-                    spreadsheetUserPropertiesConfig: .init(id: "", pageName: "", range: ""),
-                    spreadsheetEventsConfig: .init(id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c",
-                                                   pageName: "Version_1.0",
-                                                   range: "A2:F100"))
+extension Path: ExpressibleByArgument {
+    public init?(argument: String) {
+        self.init(argument)
+    }
+}
 
-do {
-    let payload = try SpreadsheetPayloadParser(config: config).getPayload()
-    let contextGenerator = ContextGenerator(config: config, payload: payload)
+struct Generate: ParsableCommand {
 
-    // generating files
-    try contextGenerator.generate().forEach {
-        print("----------------------------------------------------------------")
-        print("Start generating \($0.filePath)".yellow)
-        try FileGenerator(context: $0, config: config).generate()
-        print("Success generated \($0.filePath)".green)
-        print("----------------------------------------------------------------")
-        print("")
+    static var configuration = CommandConfiguration(abstract: "Generating analytics layer")
+
+    @Option(name: .long, default: Path("config.yaml"), help: "Path to file with config")
+    var configFilePath: Path
+
+    mutating func validate() throws {
+        guard configFilePath.isFile else {
+            print("File '\(configFilePath.lastComponent)' doesent exists at path '\(configFilePath.absolute())'".red)
+            throw ExitCode.validationFailure
+        }
     }
 
-    print()
-} catch {
-    print("ERROR".red.bold)
-    let errorDescription = ((error as? LocalizedError)?.errorDescription) ?? "UNKNOWN error"
-    print(errorDescription.red)
+    func run() throws {
+
+
+//        if let stdout = stdoutStream as? LocalFileOutputByteStream {
+//        let colors: [TerminalController.Color] = [.red, .green, .yellow, .cyan, .white]
+//
+//        let tc = TerminalController(stream: stdoutStream)
+//
+//        for (index, letter) in "Hello, world!".enumerated() {
+//            tc?.write(String(letter), inColor: colors[index % colors.count], bold: true)
+//        }
+//
+//        tc?.endLine()
+//        for i in 0...50 {
+//            tc?.clearLine()
+//            tc?.write("progress \(i*2)% : [")
+//            for j in 0...50 {
+//                if j <= i {
+//                    tc?.write("-")
+//                } else {
+//                    tc?.write(" ")
+//                }
+//            }
+//            tc?.write("]")
+//            Thread.sleep(forTimeInterval: 0.05)
+//        }
+////        tc?.clearLine()
+////        }
+
+        // TODO: just for debugging
+//        FileManager.default.changeCurrentDirectoryPath("/Users/alexfilimon/SPM/AnalyticsGen/")
+
+
+
+        do {
+
+
+            let config = try YamlConfigParser(configFilePath: configFilePath).parse()
+            let payload = try SpreadsheetPayloadParser(config: config).getPayload()
+
+            // generating events
+            let eventsContextGenerator = EventsCategoriesContextGenerator(config: config, payload: payload)
+            let eventsContexts = try eventsContextGenerator.generate()
+
+            // generating custom enums
+            let customEnumsContextGenerator = CustomEnumsContextGenerator(config: config, payload: payload)
+            let customEnumsContexts = try customEnumsContextGenerator.generate()
+
+            let progress = Progress(allItems: eventsContexts.count + customEnumsContexts.count)
+            try eventsContexts.forEach {
+                try FileGenerator(context: $0, config: config.eventsModuleConfig).generate()
+                progress.next()
+            }
+            try customEnumsContexts.forEach {
+                try FileGenerator(context: $0, config: config.customEnumModuleConfig).generate()
+                progress.next()
+            }
+
+            print()
+//            Thread.sleep(forTimeInterval: 1)
+        } catch {
+            print("ERROR".red.bold)
+            let errorDescription = ((error as? LocalizedError)?.errorDescription) ?? "UNKNOWN error"
+            print(errorDescription.red)
+            throw ExitCode.failure
+        }
+    }
+
 }
+Generate.main()
+

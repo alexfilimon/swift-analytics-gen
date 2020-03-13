@@ -11,6 +11,19 @@ public enum Language {
     case swift
     case kotlin
 
+    // MARK: - Initialization
+
+    public init(raw: String) throws {
+        switch raw {
+        case "swift":
+            self = .swift
+        case "kotlin":
+            self = .kotlin
+        default:
+            throw LanguageError.unknownLanguage(raw)
+        }
+    }
+
     // MARK: - Public Properties
 
     public var fileExtension: String {

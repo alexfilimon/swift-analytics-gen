@@ -13,16 +13,13 @@ public struct CustomEnumVariant {
 
     public let name: String
     public let description: String?
-    public let parameters: [Parameter]
 
     // MARK: - Initialization
 
     public init(name: String,
-            description: String?,
-            parameters: [Parameter]) {
+            description: String?) {
         self.name = name
         self.description = description
-        self.parameters = parameters
     }
 
 }

@@ -1,5 +1,5 @@
 //
-//  ParameterTypeRawMapperError.swift
+//  ParameterRawMapperError.swift
 //  
 //
 //  Created by Alexander Filimonov on 06/03/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ParameterTypeRawMapperError: LocalizedError {
+public enum ParameterRawMapperError: LocalizedError {
     case unknownType(String)
 
     // MARK: - LocalizedError

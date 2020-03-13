@@ -1,0 +1,26 @@
+language: "swift"
+credentials_file_path: "google.json"
+events_module_config:
+  naming_postfix: "event_category"
+  template_file_path: "events_category_template.stencil"
+  output_folder_path: "output/EventCategories"
+  spreadsheet_config:
+    id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c"
+    page_name: "Version_1.0"
+    range: "A2:G100"
+user_properties_module_config:
+  naming_postfix: ""
+  template_file_path: ""
+  output_folder_path: ""
+  spreadsheet_config:
+    id: ""
+    page_name: ""
+    range: ""
+custom_enum_module_config:
+  naming_postfix: "custom_enum"
+  template_file_path: "custom_enums_template.stencil"
+  output_folder_path: "output/CustomEnums"
+  spreadsheet_config:
+    id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c"
+    page_name: "Types"
+    range: "A2:D100"

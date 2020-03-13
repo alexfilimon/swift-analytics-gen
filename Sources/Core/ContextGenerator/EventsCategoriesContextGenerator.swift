@@ -1,5 +1,5 @@
 //
-//  ContextGenerator.swift
+//  EventsCategoriesContextGenerator.swift
 //  
 //
 //  Created by Alexander Filimonov on 06/03/2020.
@@ -9,7 +9,7 @@ import Foundation
 import Models
 import PathKit
 
-public final class ContextGenerator {
+public final class EventsCategoriesContextGenerator {
 
     // MARK: - Private Properties
 
@@ -34,7 +34,7 @@ public final class ContextGenerator {
 
 // MARK: - Private Methods
 
-private extension ContextGenerator {
+private extension EventsCategoriesContextGenerator {
 
     func getFileGenerator(by eventCategory: EventCategory) throws -> FileContext {
         return .init(filePath: getFilePath(by: eventCategory),
@@ -42,8 +42,9 @@ private extension ContextGenerator {
     }
 
     func getFilePath(by eventCategory: EventCategory) -> Path {
-        let fileName = eventCategory.name + config.namingConfig.categoryNamePostfix + "." + config.language.fileExtension
-        return config.pathConfig.outputFolderPath + Path(fileName.capitalizingFirstLetter())
+        let categoryName = "\(eventCategory.name)_\(config.eventsModuleConfig.namingPostfix)".snackToCamel(capitalizingFirst: true)
+        let fileName = categoryName + "." + config.language.fileExtension
+        return config.eventsModuleConfig.outputFolderPath + Path(fileName.capitalizingFirstLetter())
     }
 
 }

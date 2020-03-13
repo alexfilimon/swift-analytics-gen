@@ -16,20 +16,23 @@ let package = Package(
         .library(name: "Core", targets: ["Core"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/kylef/Commander.git", from: "0.9.1"),
+//        .package(url: "https://github.com/kylef/Commander.git", from: "0.9.1"),
         .package(url: "https://github.com/kylef/PathKit.git", from: "0.9.1"),
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.1"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "2.0.0"),
         .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.4.7")),
-        .package(url: "https://github.com/onevcat/Rainbow", from: "3.0.0")
+        .package(url: "https://github.com/onevcat/Rainbow", from: "3.0.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.2"),
+        .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.5.0")
     ],
     targets: [
         .target(
             name: "AnalyticsGen",
-            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService", "Parsers", "Commander", "PathKit", "Stencil", "Yams", "Rainbow"]),
+            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService", "Parsers",
+                           "PathKit", "Stencil", "Yams", "Rainbow", "ArgumentParser", "SPMUtility"]),
         .target(
             name: "Parsers",
-            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService"]),
+            dependencies: ["Models", "Core", "GoogleTokenProvider", "GoogleService", "Yams", "PathKit"]),
         .target(
             name: "GoogleService",
             dependencies: ["Models", "Core", "GoogleTokenProvider"]),

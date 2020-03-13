@@ -6,19 +6,20 @@
 //
 
 import Foundation
+import PathKit
 
-enum BaseError: LocalizedError {
-    case fileNotFound(fileName: String)
+public enum BaseError: LocalizedError {
+    case fileNotFound(path: Path)
     case folderNotFound(folderName: String)
     case unknownLanguage
     case unknownError
 }
 
 extension BaseError {
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
-        case .fileNotFound(let fileName):
-            return "File: '\(fileName)' not found"
+        case .fileNotFound(let path):
+            return "File '\(path.lastComponent)' not found at path: \(path.absolute())"
         case .folderNotFound(let folderName):
             return "Folder: '\(folderName)' not found"
         case .unknownLanguage:

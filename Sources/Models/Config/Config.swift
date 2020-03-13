@@ -6,32 +6,31 @@
 //
 
 import Foundation
+import PathKit
 
 public struct Config {
 
     // MARK: - Public Properties
 
-    public let namingConfig: NamingConfig
-    public let pathConfig: PathConfig
+    public let eventsModuleConfig: ModuleConfig
+    public let userPropertiesModuleConfig: ModuleConfig
+    public let customEnumModuleConfig: ModuleConfig
+
+    public let credentialsFilePath: Path
     public let language: Language
-    public let spreadsheedCustomEnumsConfig: SpreadsheetConfig
-    public let spreadsheetUserPropertiesConfig: SpreadsheetConfig
-    public let spreadsheetEventsConfig: SpreadsheetConfig
 
     // MARK: - Initialization
 
-    public init(namingConfig: NamingConfig,
-                pathConfig: PathConfig,
-                language: Language,
-                spreadsheedCustomEnumsConfig: SpreadsheetConfig,
-                spreadsheetUserPropertiesConfig: SpreadsheetConfig,
-                spreadsheetEventsConfig: SpreadsheetConfig) {
-        self.namingConfig = namingConfig
-        self.pathConfig = pathConfig
+    public init(eventsModuleConfig: ModuleConfig,
+                userPropertiesModuleConfig: ModuleConfig,
+                customEnumModuleConfig: ModuleConfig,
+                credentialsFilePath: Path,
+                language: Language) {
+        self.eventsModuleConfig = eventsModuleConfig
+        self.userPropertiesModuleConfig = userPropertiesModuleConfig
+        self.customEnumModuleConfig = customEnumModuleConfig
+        self.credentialsFilePath = credentialsFilePath
         self.language = language
-        self.spreadsheedCustomEnumsConfig = spreadsheedCustomEnumsConfig
-        self.spreadsheetUserPropertiesConfig = spreadsheetUserPropertiesConfig
-        self.spreadsheetEventsConfig = spreadsheetEventsConfig
     }
     
 }

@@ -33,11 +33,12 @@ final class SpreadsheetEventsParser {
 
         for row in spreadsheet.values {
             let currentCategoryName = row[safe: 0] ?? ""
-            let currentEventName = row[safe: 1] ?? ""
-            let currentEventDescription = row[safe: 2]
-            let currentParameterName = row[safe: 3] ?? ""
-            let currentParameterType = row[safe: 4] ?? ""
-            let currentParameterDescription = row[safe: 5]
+            let currentCategoryDescription = row[safe: 1]
+            let currentEventName = row[safe: 2] ?? ""
+            let currentEventDescription = row[safe: 3]
+            let currentParameterName = row[safe: 4] ?? ""
+            let currentParameterType = row[safe: 5] ?? ""
+            let currentParameterDescription = row[safe: 6]
 
             if !currentCategoryName.isEmpty {
                 if let parameterUnwrapped = parameter, let eventUnwrapped = event {
@@ -57,7 +58,7 @@ final class SpreadsheetEventsParser {
                     category = nil
                 }
                 category = .init(name: currentCategoryName,
-                                 description: nil,
+                                 description: currentCategoryDescription,
                                  events: [])
             }
 
