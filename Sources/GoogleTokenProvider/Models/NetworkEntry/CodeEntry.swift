@@ -5,8 +5,6 @@
 //  Created by Alexander Filimonov on 01/03/2020.
 //
 
-import Foundation
-
 struct CodeEntry: Decodable {
 
     // MARK: - Properties

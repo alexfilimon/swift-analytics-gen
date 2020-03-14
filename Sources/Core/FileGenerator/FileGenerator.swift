@@ -8,6 +8,7 @@
 import PathKit
 import Stencil
 
+/// Class for generating file from context
 public final class FileGenerator {
 
     // MARK: - Private Properties
@@ -16,12 +17,15 @@ public final class FileGenerator {
 
     // MARK: - Initialization
 
+    /// Initializer for generator
+    /// - Parameter context: context for generate
     public init(context: FileContext) {
         self.context = context
     }
 
     // MARK: - Public Methods
 
+    /// Method for generating file
     public func generate() throws {
         // Check if template file exists
         let templateFilePath = context.templateFilePath

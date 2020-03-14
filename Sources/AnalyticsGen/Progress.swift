@@ -9,6 +9,7 @@ import Foundation
 import Basic
 import SPMUtility
 
+/// Class for creating visual progress in CLI
 final class Progress {
 
     // MARK: - Constants
@@ -28,6 +29,8 @@ final class Progress {
 
     // MARK: - Initialization
 
+    /// Initializer for progress
+    /// - Parameter allItems: number of all items
     init(allItems: Int) {
         self.allItems = allItems
 
@@ -37,9 +40,9 @@ final class Progress {
 
     // MARK: - Methods
 
+    /// Method for going to the next item
     func next() {
         currentItem += 1
-//        Thread.sleep(forTimeInterval: 1)
         printProgress()
     }
 

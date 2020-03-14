@@ -9,5 +9,5 @@ public protocol GoogleSpreadsheetAbstractService {
     /// Method for getting content in table
     /// - Parameters:
     ///   - spreadsheetConfig: entity for getting spreadsheet
-    func getGoogleSheetData(by spreadsheetConfig: SpreadsheetRequestEntity) throws -> SpreadSheetEntry
+    func getGoogleSheetData(by spreadsheetConfig: SpreadsheetNetworkRequestEntity) throws -> SpreadSheetNetworkEntry
 }

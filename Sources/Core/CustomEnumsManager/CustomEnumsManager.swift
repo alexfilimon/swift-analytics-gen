@@ -40,7 +40,7 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
             let moduleConfig = moduleConfig,
             let customEnum = customEnums.first(where: { $0.name == customEnumName })
         else {
-            throw CustomEnumsManagerError.unknownEnum
+            throw CustomEnumsManagerError.enumDoesentExists(enumName: customEnumName)
         }
         return "\(customEnum.name)_\(moduleConfig.namingPostfix)".snackToCamel(capitalizingFirst: true)
     }

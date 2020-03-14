@@ -5,9 +5,7 @@
 //  Created by Alexander Filimonov on 13/03/2020.
 //
 
-import Foundation
-
-public struct SpreadsheetRequestEntity {
+public struct SpreadsheetNetworkRequestEntity {
 
     // MARK: - Public Properties
 

@@ -24,6 +24,7 @@ public final class ConfigValidator {
     public func validate() throws {
         try validate(moduleConfig: config.eventsModuleConfig)
         try validate(moduleConfig: config.customEnumModuleConfig)
+        // TODO: validate user properties when they appear
 //        try validate(moduleConfig: config.userPropertiesModuleConfig)
         try validate(credentialFilePath: config.baseConig.credentialsFilePath)
     }

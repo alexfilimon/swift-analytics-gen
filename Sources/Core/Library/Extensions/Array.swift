@@ -9,6 +9,7 @@ import Foundation
 
 public extension Array {
 
+    /// Method for safe subscripting array
     subscript (safe index: Int) -> Element? {
         return indices ~= index ? self[index] : nil
     }

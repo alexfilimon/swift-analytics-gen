@@ -5,6 +5,8 @@
 //  Created by Alexander Filimonov on 13/03/2020.
 //
 
+/// Class for tranfering parameters to raw representation
+/// (it knows custom enums)
 public final class ParameterMapper {
 
     // MARK: - Private Properties
@@ -14,6 +16,10 @@ public final class ParameterMapper {
 
     // MARK: - Initialization
 
+    /// Initializer for class
+    /// - Parameters:
+    ///   - customEnumNameGettable: entity for getting names of customEnums
+    ///   - language: language to use
     public init(customEnumNameGettable: CustomEnumNameGettable,
                 language: Language) {
         self.customEnumNameGettable = customEnumNameGettable
@@ -22,6 +28,8 @@ public final class ParameterMapper {
 
     // MARK: - Public Methods
 
+    /// Mapping method
+    /// - Parameter parameter: parameter that need to be translating
     public func map(parameter: Parameter) throws -> [String: Any] {
         let (isEnum, typeName) = try getParatemerName(parameter: parameter)
         return [

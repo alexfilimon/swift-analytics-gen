@@ -12,14 +12,14 @@ public final class SpreadsheetCustomEnumsService: CustomEnumsAbstractService {
 
     // MARK: - Private Properties
 
-    private let spreadsheetService: GoogleSpreadsheetAbstractService
+    private let networkSpreadsheetService: GoogleSpreadsheetAbstractService
     private let spreadsheetConfig: SpreadsheetConfig?
 
     // MARK: - Initialization
 
     public init(creadentialFilePath: Path,
                 spreadsheetConfig: SpreadsheetConfig?) throws {
-        self.spreadsheetService = try GoogleSpreadsheetService(creadentialFilePath: creadentialFilePath)
+        self.networkSpreadsheetService = try GoogleSpreadsheetService(creadentialFilePath: creadentialFilePath)
         self.spreadsheetConfig = spreadsheetConfig
     }
 
@@ -29,10 +29,10 @@ public final class SpreadsheetCustomEnumsService: CustomEnumsAbstractService {
         guard let spreadsheetConfig = spreadsheetConfig else {
             return []
         }
-        let requestEntiry = SpreadsheetRequestEntity(id: spreadsheetConfig.id,
+        let requestEntiry = SpreadsheetNetworkRequestEntity(id: spreadsheetConfig.id,
                                                      pageName: spreadsheetConfig.pageName,
                                                      range: spreadsheetConfig.range)
-        let spreadsheetEntry = try spreadsheetService.getGoogleSheetData(by: requestEntiry)
+        let spreadsheetEntry = try networkSpreadsheetService.getGoogleSheetData(by: requestEntiry)
         return SpreadsheetCustomEnumParser(spreadsheet: .init(from: spreadsheetEntry)).getCustomEnums()
     }
 

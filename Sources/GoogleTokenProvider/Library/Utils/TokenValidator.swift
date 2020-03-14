@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Class for validating accessToken
 final class TokenValidator {
 
     // MARK: - Constants

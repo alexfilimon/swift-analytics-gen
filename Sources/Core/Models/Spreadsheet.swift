@@ -17,7 +17,7 @@ public struct Spreadsheet {
 
     // MARK: - Initialization
 
-    init(from entry: SpreadSheetEntry) {
+    init(from entry: SpreadSheetNetworkEntry) {
         self.range = entry.range
         self.majorDimension = entry.majorDimension
         self.values = entry.values

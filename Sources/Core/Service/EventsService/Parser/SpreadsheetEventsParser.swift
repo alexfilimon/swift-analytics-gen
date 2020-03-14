@@ -1,32 +1,32 @@
 //
-//  GoogleSheetEventsParser.swift
+//  SpreadsheetEventsParser.swift
 //  
 //
-//  Created by Alexander Filimonov on 13/03/2020.
+//  Created by Alexander Filimonov on 01/03/2020.
 //
 
-public final class GoogleSheetEventsParser: ModuleContextGenParser<Spreadsheet, EventCategory> {
+final class SpreadsheetEventsParser {
 
-    // MARK: - ModuleContextGenParser
+    // MARK: - Private Properties
 
-    public override func parse() throws -> [EventCategory] {
-        return getEvents()
+    private let spreadsheet: Spreadsheet
+
+    // MARK: - Initialization
+
+    init(spreadsheet: Spreadsheet) {
+        self.spreadsheet = spreadsheet
     }
 
-}
+    // MARK: - Public Methods
 
-// MARK: - Pirvate Methods
-
-private extension GoogleSheetEventsParser {
-
-    func getEvents() -> [EventCategory] {
+    public func parse() -> [EventCategory] {
         var categories: [EventCategory] = []
 
         var category: EventCategory?
         var event: Event?
         var parameter: Parameter?
 
-        for row in input.values {
+        for row in spreadsheet.values {
             let currentCategoryName = row[safe: 0]?.nilIfEmpty()
             let currentCategoryDescription = row[safe: 1]?.nilIfEmpty()
             let currentEventName = row[safe: 2]?.nilIfEmpty()

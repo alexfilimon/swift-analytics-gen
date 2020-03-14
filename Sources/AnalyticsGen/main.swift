@@ -6,54 +6,23 @@ import Basic
 import SPMUtility
 import Core
 
-extension Path: ExpressibleByArgument {
-    public init?(argument: String) {
-        self.init(argument)
-    }
-}
-
+// TODO: just for debugging through xcode
 FileManager.default.changeCurrentDirectoryPath("/Users/alexfilimon/SPM/AnalyticsGen/")
 
 struct Generate: ParsableCommand {
 
+    // MARK: - Static Propeties
+
     static var configuration = CommandConfiguration(abstract: "Generating analytics layer")
+
+    // MARK: - Options
 
     @Option(name: .long, default: Path("config.yaml"), help: "Path to file with config")
     var configFilePath: Path
 
+    // MARK: - Methods
+
     func run() throws {
-
-
-//        if let stdout = stdoutStream as? LocalFileOutputByteStream {
-//        let colors: [TerminalController.Color] = [.red, .green, .yellow, .cyan, .white]
-//
-//        let tc = TerminalController(stream: stdoutStream)
-//
-//        for (index, letter) in "Hello, world!".enumerated() {
-//            tc?.write(String(letter), inColor: colors[index % colors.count], bold: true)
-//        }
-//
-//        tc?.endLine()
-//        for i in 0...50 {
-//            tc?.clearLine()
-//            tc?.write("progress \(i*2)% : [")
-//            for j in 0...50 {
-//                if j <= i {
-//                    tc?.write("-")
-//                } else {
-//                    tc?.write(" ")
-//                }
-//            }
-//            tc?.write("]")
-//            Thread.sleep(forTimeInterval: 0.05)
-//        }
-////        tc?.clearLine()
-////        }
-
-        // TODO: just for debugging
-//
-
-
 
         do {
             // Generate config
@@ -72,20 +41,18 @@ struct Generate: ParsableCommand {
             let parameterMapper = ParameterMapper(customEnumNameGettable: customEnumsManager,
                                                   language: config.baseConig.language)
 
+            // Bring all context generators in one place
             var moduleContextGenerators: [ModuleContextGenerator] = [customEnumsManager]
 
             // Events module context gen
             if let eventConfing = config.eventsModuleConfig {
-                let eventModuleContextGenerator = BaseModuleContextGen<Spreadsheet, EventCategory, GoogleSheetModuleContextGenService, GoogleSheetEventsParser, EventContextGen>(
-                    service: GoogleSheetModuleContextGenService(
-                        creadentialFilePath: config.baseConig.credentialsFilePath,
-                        spreadsheetRequest: eventConfing.spreadsheetConfig
-                    ),
-                    baseConfig: config.baseConig,
-                    moduleConfig: eventConfing,
-                    parameterMapper: parameterMapper
-                )
-                moduleContextGenerators.append(eventModuleContextGenerator)
+                let eventsService = try SpreadsheetEventsService(creadentialFilePath: config.baseConig.credentialsFilePath,
+                                                                 spreadsheetConfig: eventConfing.spreadsheetConfig)
+                let eventsModuleContextGenerator = EventsModuleContextGenerator(service: eventsService,
+                                                                                baseConfig: config.baseConig,
+                                                                                moduleConfig: eventConfing,
+                                                                                parameterMapper: parameterMapper)
+                moduleContextGenerators.append(eventsModuleContextGenerator)
             }
 
             // Generate all file contexts
@@ -105,4 +72,3 @@ struct Generate: ParsableCommand {
 
 }
 Generate.main()
-

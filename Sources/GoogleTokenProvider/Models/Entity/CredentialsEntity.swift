@@ -5,8 +5,6 @@
 //  Created by Alexander Filimonov on 29/02/2020.
 //
 
-import Foundation
-
 struct CredentialsEntity: Codable {
 
     // MARK: - Nested Types

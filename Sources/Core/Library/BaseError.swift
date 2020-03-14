@@ -13,10 +13,10 @@ public enum BaseError: LocalizedError {
     case folderNotFound(folderName: String)
     case unknownLanguage
     case unknownError
-}
 
-extension BaseError {
-    public var errorDescription: String? {
+    // MARK: - LocalizedError
+
+    public var localizedDescription: String {
         switch self {
         case .fileNotFound(let path):
             return "File '\(path.lastComponent)' not found at path: \(path.absolute())"
@@ -28,4 +28,9 @@ extension BaseError {
             return "Unknown error"
         }
     }
+
+    public var errorDescription: String? {
+        return localizedDescription
+    }
+
 }

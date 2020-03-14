@@ -7,6 +7,7 @@
 
 import PathKit
 
+/// Entity that describes context of file to generate
 public struct FileContext {
 
     // MARK: - Public Properties
@@ -17,6 +18,11 @@ public struct FileContext {
 
     // MARK: - Initialization
 
+    /// Initializer for struct
+    /// - Parameters:
+    ///   - filePath: path to generating file
+    ///   - templateFilePath: path to file's template
+    ///   - context: context for generating
     public init(filePath: Path,
                 templateFilePath: Path,
                 context: [String: Any]) {

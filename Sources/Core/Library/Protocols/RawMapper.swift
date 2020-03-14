@@ -5,6 +5,7 @@
 //  Created by Alexander Filimonov on 06/03/2020.
 //
 
+/// Abstract class for translating soma payload to raw
 public class RawMapper<Model>: RawMappable {
 
     // MARK: - Private Properties
@@ -16,6 +17,12 @@ public class RawMapper<Model>: RawMappable {
 
     // MARK: - Initialization
 
+    /// Initializer for RawMapper
+    /// - Parameters:
+    ///   - model: model, that need to be translated
+    ///   - moduleConfig: module configuration
+    ///   - baseConfig: base configuration
+    ///   - parameterMapper: parameterMapper (should be passed for all mappers except CustomEnumMapper)
     public init(model: Model,
                 moduleConfig: ModuleConfig,
                 baseConfig: BaseConfig,
@@ -28,6 +35,7 @@ public class RawMapper<Model>: RawMappable {
 
     // MARK: - RawMappable
 
+    /// Method for getting raw representation (must be overriden)
     public func toRaw() throws -> [String : Any] {
         fatalError("method \(#function) must be implemented")
     }

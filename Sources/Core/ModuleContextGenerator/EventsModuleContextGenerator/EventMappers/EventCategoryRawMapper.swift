@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class EventCategoryRawMapper: RawMapper<EventCategory> {
+final class EventCategoryRawMapper: RawMapper<EventCategory> {
 
     override public func toRaw() throws -> [String : Any] {
         return [

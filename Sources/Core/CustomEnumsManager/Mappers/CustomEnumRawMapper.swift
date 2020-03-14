@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Class for translating customEnum to raw representation
 public final class CustomEnumRawMapper: RawMapper<CustomEnum> {
 
     override public func toRaw() throws -> [String : Any] {

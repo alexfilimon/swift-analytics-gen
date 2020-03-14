@@ -8,5 +8,19 @@
 import Foundation
 
 public enum CustomEnumsManagerError: LocalizedError {
-    case unknownEnum
+    case enumDoesentExists(enumName: String)
+
+    // MARK: - LocalizedError
+
+    public var localizedDescription: String {
+        switch self {
+        case .enumDoesentExists(let enumName):
+            return "Enum '\(enumName)' doesent exists in source"
+        }
+    }
+
+    public var errorDescription: String? {
+        return localizedDescription
+    }
+
 }

@@ -5,9 +5,6 @@
 //  Created by Alexander Filimonov on 01/03/2020.
 //
 
-import Foundation
-import NetworkService
-
 final class SpreadsheetCustomEnumParser {
 
     // MARK: - Private Properties

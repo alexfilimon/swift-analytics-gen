@@ -22,4 +22,5 @@ public enum FileServiceError: Error {
     public var errorDescription: String? {
         return localizedDescription
     }
+
 }

@@ -5,7 +5,6 @@
 //  Created by Alexander Filimonov on 01/03/2020.
 //
 
-import Foundation
 import GoogleTokenProvider
 import Connection
 import PathKit
@@ -35,7 +34,7 @@ public final class GoogleSpreadsheetService: GoogleSpreadsheetAbstractService {
 
     // MARK: - GoogleSpreadsheetAbstractService
 
-    public func getGoogleSheetData(by spreadsheetConfig: SpreadsheetRequestEntity) throws -> SpreadSheetEntry {
+    public func getGoogleSheetData(by spreadsheetConfig: SpreadsheetNetworkRequestEntity) throws -> SpreadSheetNetworkEntry {
         let id = spreadsheetConfig.id
         let pageName = spreadsheetConfig.pageName
         let range = spreadsheetConfig.range

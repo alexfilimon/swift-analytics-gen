@@ -5,8 +5,7 @@
 //  Created by Alexander Filimonov on 01/03/2020.
 //
 
-import Foundation
-
+/// Enum that describes type of parameter
 public enum ParameterType {
     case date
     case int

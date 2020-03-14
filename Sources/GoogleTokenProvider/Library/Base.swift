@@ -10,6 +10,7 @@ import Foundation
   import Cocoa
 #endif
 
+/// Method for opening URL in browser or printing it in CLI
 internal func openURL(_ url: URL) {
   #if os(OSX)
     if !NSWorkspace.shared.open(url) {

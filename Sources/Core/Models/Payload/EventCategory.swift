@@ -5,8 +5,6 @@
 //  Created by Alexander Filimonov on 01/03/2020.
 //
 
-import Foundation
-
 public struct EventCategory: Equatable {
 
     // MARK: - Public Properties

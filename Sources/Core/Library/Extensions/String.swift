@@ -9,10 +9,13 @@ import Foundation
 
 public extension String {
 
+    /// Method for capitalizing only first letter
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
 
+    /// Method for modifying string from snack_case to camelCase
+    /// - Parameter capitalizingFirst: boolean flag, that indicates if need capitalize first letter
     func snackToCamel(capitalizingFirst: Bool) -> String {
         let components = self.split(separator: "_")
         let componentsCalitalized = components.map { String($0).lowercased().capitalizingFirstLetter() }
@@ -26,6 +29,7 @@ public extension String {
         return newComponents.joined()
     }
 
+    /// Method that returns nil if string isEmpty
     func nilIfEmpty() -> String? {
         return isEmpty ? nil : self
     }
