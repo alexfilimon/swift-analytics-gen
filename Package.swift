@@ -10,7 +10,7 @@ let package = Package(
     ],
     products: [
         .executable(name: "AnalyticsGen", targets: ["AnalyticsGen"]),
-        .library(name: "Service", targets: ["Service"]),
+        .library(name: "NetworkService", targets: ["NetworkService"]),
         .library(name: "GoogleTokenProvider", targets: ["GoogleTokenProvider"]),
         .library(name: "Core", targets: ["Core"]),
         .library(name: "Connection", targets: ["Connection"]),
@@ -33,10 +33,10 @@ let package = Package(
                            "PathKit","Rainbow", "ArgumentParser", "SPMUtility"]),
         .target(
             name: "Core",
-            dependencies: ["Service",
+            dependencies: ["NetworkService",
                            "PathKit", "Yams", "Stencil"]),
         .target(
-            name: "Service",
+            name: "NetworkService",
             dependencies: ["Connection", "GoogleTokenProvider",
                            "PathKit"]),
         .target(

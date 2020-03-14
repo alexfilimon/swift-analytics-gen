@@ -5,38 +5,32 @@
 //  Created by Alexander Filimonov on 13/03/2020.
 //
 
-import Service
 import PathKit
 
+/// Manager for getting customEnum's names and generating contexts for customEnums files
 public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGettable {
 
     // MARK: - Private Properties
 
     private let moduleConfig: ModuleConfig?
     private let baseConfig: BaseConfig
-    private let spreadsheetService: GoogleSpreadsheetAbstractService
+    private let customEnumsService: CustomEnumsAbstractService
     private var customEnums: [CustomEnum] = []
 
     // MARK: - Initialization
 
     public init(moduleConfig: ModuleConfig?,
-                baseConfig: BaseConfig) throws {
+                baseConfig: BaseConfig,
+                customEnumsService: CustomEnumsAbstractService) throws {
         self.moduleConfig = moduleConfig
         self.baseConfig = baseConfig
-        self.spreadsheetService = try GoogleSpreadsheetService(creadentialFilePath: baseConfig.credentialsFilePath)
+        self.customEnumsService = customEnumsService
     }
 
     // MARK: - Public Methods
 
     public func prepareForUse() throws {
-        guard let spreadsheetConfig = moduleConfig?.spreadsheetConfig else {
-            return
-        }
-        let requestEntiry = SpreadsheetRequestEntity(id: spreadsheetConfig.id,
-                                                     pageName: spreadsheetConfig.pageName,
-                                                     range: spreadsheetConfig.range)
-        let spreadsheetEntry = try spreadsheetService.getGoogleSheetData(by: requestEntiry)
-        customEnums = SpreadsheetCustomEnumParser(spreadsheet: .init(from: spreadsheetEntry)).getCustomEnums()
+        self.customEnums = try customEnumsService.getCustomEnums()
     }
 
     // MARK: - CustomEnumNameGettable

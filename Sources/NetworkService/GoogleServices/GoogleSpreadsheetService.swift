@@ -29,7 +29,7 @@ public final class GoogleSpreadsheetService: GoogleSpreadsheetAbstractService {
     /// - Parameter tokenProvider: token provider for authorization
     public init(creadentialFilePath: Path) throws {
         let googleTokenProvider = try GoogleTokenProvider(scopes: Constants.authScopes,
-                                                      credentialFilePath: creadentialFilePath)
+                                                          credentialFilePath: creadentialFilePath)
         self.connection = .init(tokenProvider: googleTokenProvider)
     }
 

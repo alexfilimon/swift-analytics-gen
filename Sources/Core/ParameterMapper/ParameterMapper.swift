@@ -39,7 +39,7 @@ public final class ParameterMapper {
 private extension ParameterMapper {
 
     func getParatemerName(parameter: Parameter) throws -> (isEnum: Bool, typeName: String) {
-        if let defaultParam = language.getDefaultParameterType(by: parameter.type) {
+        if let defaultParam = language.getDefaultParameterTypeName(by: parameter.type) {
             return (isEnum: false, typeName: defaultParam)
         }
         return (isEnum: true, typeName: try customEnumNameGettable.getFinalName(forName: parameter.type.stringValue()))

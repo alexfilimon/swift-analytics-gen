@@ -20,7 +20,7 @@ extension ConfigYamlEntry: EntityEncodable {
                      eventsModuleConfig: try events_module_config?.toEntity(),
                      userPropertiesModuleConfig: try user_properties_module_config?.toEntity(),
                      baseConig: .init(credentialsFilePath: .init(credentials_file_path),
-                                      language: try .init(raw: language)))
+                                      language: try LanguageParser(rawName: language).parse()))
     }
 
 }

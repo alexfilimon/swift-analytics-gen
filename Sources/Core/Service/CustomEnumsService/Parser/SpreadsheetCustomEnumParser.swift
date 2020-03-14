@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Service
+import NetworkService
 
 final class SpreadsheetCustomEnumParser {
 

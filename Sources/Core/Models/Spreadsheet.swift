@@ -5,7 +5,7 @@
 //  Created by Alexander Filimonov on 13/03/2020.
 //
 
-import Service
+import NetworkService
 
 public struct Spreadsheet {
 

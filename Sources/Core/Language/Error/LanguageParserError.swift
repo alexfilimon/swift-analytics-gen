@@ -1,5 +1,5 @@
 //
-//  LanguageError.swift
+//  LanguageParserError.swift
 //  
 //
 //  Created by Alexander Filimonov on 12/03/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum LanguageError: LocalizedError {
+public enum LanguageParserError: LocalizedError {
     case unknownLanguage(String)
 
 }

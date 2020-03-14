@@ -56,14 +56,16 @@ struct Generate: ParsableCommand {
 
 
         do {
-
             // Generate config
             let config = try YamlConfigParser(configFilePath: configFilePath).parse()
             try ConfigValidator(config: config).validate()
 
             // Get customEnumsManager
+            let customEnumsService = try SpreadsheetCustomEnumsService(creadentialFilePath: config.baseConig.credentialsFilePath,
+                                                                       spreadsheetConfig: config.customEnumModuleConfig?.spreadsheetConfig)
             let customEnumsManager = try CustomEnumsManager(moduleConfig: config.customEnumModuleConfig,
-                                                            baseConfig: config.baseConig)
+                                                            baseConfig: config.baseConig,
+                                                            customEnumsService: customEnumsService)
             try customEnumsManager.prepareForUse()
 
             // Get Parameter Mapper
@@ -72,6 +74,7 @@ struct Generate: ParsableCommand {
 
             var moduleContextGenerators: [ModuleContextGenerator] = [customEnumsManager]
 
+            // Events module context gen
             if let eventConfing = config.eventsModuleConfig {
                 let eventModuleContextGenerator = BaseModuleContextGen<Spreadsheet, EventCategory, GoogleSheetModuleContextGenService, GoogleSheetEventsParser, EventContextGen>(
                     service: GoogleSheetModuleContextGenService(
@@ -85,33 +88,13 @@ struct Generate: ParsableCommand {
                 moduleContextGenerators.append(eventModuleContextGenerator)
             }
 
+            // Generate all file contexts
             let contexts = try moduleContextGenerators.flatMap { try $0.generate() }
+            let progress = Progress(allItems: contexts.count)
             try contexts.forEach {
                 try FileGenerator(context: $0).generate()
+                progress.next()
             }
-
-//            let payload = try SpreadsheetPayloadParser(config: config).parse()
-//
-//            // generating events
-//            let eventsContextGenerator = EventsCategoriesContextGenerator(config: config, payload: payload)
-//            let eventsContexts = try eventsContextGenerator.generate()
-//
-//            // generating custom enums
-//            let customEnumsContextGenerator = CustomEnumsContextGenerator(config: config, payload: payload)
-//            let customEnumsContexts = try customEnumsContextGenerator.generate()
-//
-//            let progress = Progress(allItems: eventsContexts.count + customEnumsContexts.count)
-//            try eventsContexts.forEach {
-//                try FileGenerator(context: $0, config: config.eventsModuleConfig).generate()
-//                progress.next()
-//            }
-//            try customEnumsContexts.forEach {
-//                try FileGenerator(context: $0, config: config.customEnumModuleConfig).generate()
-//                progress.next()
-//            }
-
-            print()
-//            Thread.sleep(forTimeInterval: 1)
         } catch {
             print("ERROR".red.bold)
             let errorDescription = ((error as? LocalizedError)?.errorDescription) ?? "UNKNOWN error"
