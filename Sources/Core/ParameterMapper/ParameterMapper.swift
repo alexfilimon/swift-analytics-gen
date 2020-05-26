@@ -34,6 +34,7 @@ public final class ParameterMapper {
         let (isEnum, typeName) = try getParatemerName(parameter: parameter)
         return [
             "name": parameter.name.snackToCamel(capitalizingFirst: false),
+            "raw_name": parameter.name,
             "description": parameter.description as Any,
             "is_enum": isEnum,
             "type": typeName

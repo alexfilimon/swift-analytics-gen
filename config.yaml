@@ -1,5 +1,7 @@
 language: "swift"
 credentials_file_path: "google.json"
+categories_extension_template_path: "analytics_category_template.stencil"
+categories_extension_output_path: "output"
 events_module_config:
   naming_postfix: "event_category"
   template_file_path: "events_category_template.stencil"
