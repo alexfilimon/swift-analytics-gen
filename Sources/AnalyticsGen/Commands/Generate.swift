@@ -95,7 +95,7 @@ private extension Generate {
                 ),
                 OneColumnTable.Row(
                     strings: [
-                        "Version: 0.1.0",
+                        "Version: \(LibConstants.version)",
                         "Author: Alexander Filimonov (alexfilimon)"
                     ],
                     color: .yellow,

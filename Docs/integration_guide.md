@@ -3,7 +3,7 @@
 1. [Recieve google credentials](#Recieve-google-credentials)
 2. [Prepare Google Sheet](spreadsheet.md)
 3. [Prepare config and templates files](#Prepare-config-and-templates-files)
-4. [Add script into repository](#Add-script-into-repository)
+4. [Install script via CocoaPods](#Install-script-via-CocoaPods)
 5. [Setup makefile](#Setup-makefile)
 
 ## Recieve google credentials
@@ -31,15 +31,12 @@
     3. Template for category extension (optional)
 3. Copy base config structure (copy from [resources](#Config)) and edit it according to yours needs. Description of config you can find [here](config.md).
 
-## Add script into repository
+## Install script via CocoaPods
 
-Copy script, that is located in `` into your project (for example in folder `your_project/analytics_gen/`)
-// TODO: place folder
-
-# Setup makefile
-
-1. Fill name command to invoke generator (for example `analytics`)
-2. Fill command to invoke generator (for example `analytics_gen/analytics_gen_script configFilePath=analytics_gen/config.yaml`)
+1. Add to podfile `pod 'AnalyticsGen', :git => "https://github.com/alexfilimon/swift-analytics-gen", :tag => "0.1.0"`
+2. Add command to Makefile (optional)
+    1. Fill name command to invoke generator (for example `analytics`)
+    2. Fill command to invoke generator (for example `analytics_gen/analytics_gen_script configFilePath=analytics_gen/config.yaml`)
 
 ## Resources
 
