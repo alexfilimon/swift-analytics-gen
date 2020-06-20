@@ -36,7 +36,7 @@
 1. Add to podfile `pod 'AnalyticsGen', :git => "https://github.com/alexfilimon/swift-analytics-gen", :tag => "0.1.0"`
 2. Add command to Makefile (optional)
     1. Fill name command to invoke generator (for example `analytics`)
-    2. Fill command to invoke generator (for example `analytics_gen/analytics_gen_script configFilePath=analytics_gen/config.yaml`)
+    2. Fill command to invoke generator (for example `Pods/AnalyticsGen/bin/AnalyticsGen configFilePath=analytics_gen/config.yaml`)
 
 ## Resources
 
