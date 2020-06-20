@@ -2,9 +2,12 @@
 
 ## Creted template
 
-There are already swift/kotlin templates in folders `template/ios/`, `template/android/`
-// TODO: change folder
+There are already swift/kotlin templates in folders `Templates/ios/`, `Templates/android/`
 
 ## Template payload
 
+// WIP
+
 ## Creating template
+
+You can create your own template, tah will use existance payload. 

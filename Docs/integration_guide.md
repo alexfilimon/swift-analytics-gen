@@ -25,18 +25,20 @@
 ## Prepare config and templates files
 
 1. Create `analytics_gen_config.yaml` file and place into your project
-2. Prepare templates
+2. Prepare [templates](templates.md)
     1. Template for event category (required)
     2. Template for custom enum (required)
     3. Template for category extension (optional)
 3. Copy base config structure (copy from [resources](#Config)) and edit it according to yours needs. Description of config you can find [here](config.md).
 
-## Install script via CocoaPods
+## Installation
 
-1. Add to podfile `pod 'AnalyticsGen', :git => "https://github.com/alexfilimon/swift-analytics-gen", :tag => "0.1.0"`
-2. Add command to Makefile (optional)
-    1. Fill name command to invoke generator (for example `analytics`)
-    2. Fill command to invoke generator (for example `Pods/AnalyticsGen/bin/AnalyticsGen configFilePath=analytics_gen/config.yaml`)
+1. Add to podfile `pod 'AnalyticsGen', '0.1.2'` or download binary manually from last release
+2. Setup calling binary from Makefile (optional)
+    1. Fill name command to invoke generator (for example `analytics_gen`)
+    2. Fill command to invoke generator
+        - for Cocoapods `Pods/AnalyticsGen/bin/AnalyticsGen configFilePath={path_to_your_config}`
+        - for manual installation write path to your binary and pass to binary path to config
 
 ## Resources
 

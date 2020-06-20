@@ -1,7 +1,0 @@
-{% if description %}// {{ description }}{% endif %}
-enum class {{ name }}(val rawValue: String) {
-    {% for variant in variants %}
-    {% if variant.description %}// {{ variant.description }}
-    {% endif %}{{ variant.name }}("{{ variant.raw_value }}"){% if not forloop.last %},{% endif %}
-    {% endfor %}
-}

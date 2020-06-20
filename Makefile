@@ -9,3 +9,9 @@ release_build:
 
 executable: release_build
 	cp $(BUILD_PATH) ./bin/
+	git add bin/AnalyticsGen
+	git commit -m "generated bin $(V)"
+	git push
+	git tag $(V)
+	git push origin $(V)
+	pod trunk push --allow-warnings

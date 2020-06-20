@@ -1,0 +1,20 @@
+import ru.surfstudio.android.analytics.event.Event
+
+{% if description %}/**
+* Описание: {{ description }}
+*/
+{{ description }}{% endif %}object {{ name }}{{ postfix }} {
+    {% for event in events %}
+    {% if event.description %}/**
+     * Описание: {{ event.description }}{% if event.parameters %}
+     *{% for parameter in event.parameters %}
+     * @param {{ parameter.name }}{% if parameter.description %} - {{ parameter.description }}{% endif %}{% endfor %}{% endif %}
+     */{% endif %}
+    fun {{ event.name }}({% if event.parameters %}{% for parameter in event.parameters %}{{ parameter.name }}: {{ parameter.type }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}): Event {
+        return BaseEvent(
+            name = "{{ event.name }}",
+            parameters = mapOf<String, Any>({% for parameter in event.parameters %}{{ parameter.name }} to {{ parameter.name }}{% if not forloop.last %}, {% endif %}{% endfor %})
+        )
+    }
+    {% endfor %}
+}
