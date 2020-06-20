@@ -1,9 +1,0 @@
-{
-    "client_id": "823683220506-ung4k2t81qvced4c4klcd7r8sobfrhpp.apps.googleusercontent.com",
-    "project_id": "nfp-project",
-    "authorize_url": "https://accounts.google.com/o/oauth2/auth",
-    "token_url": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret": "Q4DeXyOHcDhSgUgpA1Gb-PQK",
-    "callback": "/google/callback"
-}

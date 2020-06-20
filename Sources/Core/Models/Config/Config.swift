@@ -16,18 +16,30 @@ public struct Config {
     public let eventsModuleConfig: ModuleConfig?
     public let userPropertiesModuleConfig: ModuleConfig?
 
-    public let baseConig: BaseConfig
+    public let baseConfig: BaseConfig
+
+    public let categoriesExtensionTemplatePath: Path?
+    public let categoriesExtensionOutputPath: Path?
 
     // MARK: - Initialization
 
     public init(customEnumModuleConfig: ModuleConfig?,
                 eventsModuleConfig: ModuleConfig?,
                 userPropertiesModuleConfig: ModuleConfig?,
-                baseConig: BaseConfig) {
+                baseConfig: BaseConfig,
+                categoriesExtensionTemplatePath: String?,
+                categoriesExtensionOutputPath: String?) {
         self.eventsModuleConfig = eventsModuleConfig
         self.userPropertiesModuleConfig = userPropertiesModuleConfig
         self.customEnumModuleConfig = customEnumModuleConfig
-        self.baseConig = baseConig
+        self.baseConfig = baseConfig
+        // TODO: remove force unwrap
+        self.categoriesExtensionTemplatePath = categoriesExtensionTemplatePath == nil
+            ? nil
+            : Path(categoriesExtensionTemplatePath!)
+        self.categoriesExtensionOutputPath = categoriesExtensionOutputPath == nil
+            ? nil
+            : Path(categoriesExtensionOutputPath!)
     }
     
 }

@@ -1,0 +1,20 @@
+public extension AnalyticsManager {
+    func track(category: AnalyticsCategory) {
+        track(event: category.getEvent())
+    }
+}
+
+public enum AnalyticsCategory {
+    {% for category in categories %}
+    case {{ category.short_name }}({{ category.full_name }}){% endfor %}
+
+    // MARK: - Methods
+
+    public func getEvent() -> AnalyticsEvent {
+        switch self { {% for category in categories %}
+        case .{{ category.short_name }}(let event):
+            return event{% endfor %}
+        }
+    }
+
+}

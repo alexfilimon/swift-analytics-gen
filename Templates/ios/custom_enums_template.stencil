@@ -1,0 +1,7 @@
+{% if description %}/// {{ description }}{% endif %}
+public enum {{ name }}: String {
+    {% for variant in variants %}
+    {% if variant.description %}/// {{ variant.description }}
+    {% endif %}case {{ variant.name }}{% if variant.raw_value != variant.name %} = "{{ variant.raw_value }}"{% endif %}
+    {% endfor %}
+}

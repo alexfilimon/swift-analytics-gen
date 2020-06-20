@@ -15,6 +15,8 @@ public final class EventsModuleContextGenerator: ModuleContextGenerator {
     private let moduleConfig: ModuleConfig
     private let parameterMapper: ParameterMapper
 
+    private var eventCategories: [EventCategory]?
+
     // MARK: - Initialization
 
     /// Initializer for class
@@ -33,16 +35,37 @@ public final class EventsModuleContextGenerator: ModuleContextGenerator {
         self.parameterMapper = parameterMapper
     }
 
+    // MARK: - Public Methods
+
+    public func getEvents() throws -> [EventCategory] {
+        try tryGetEventsFromService()
+        return eventCategories ?? []
+    }
+
     // MARK: - ModuleContextGenerator
 
     /// Method for generating constexts
     public func generate() throws -> [FileContext] {
-        return try service.getEvents().map {
+        try tryGetEventsFromService()
+        return try eventCategories?.map {
             try EventCategoryContextGenerator(input: $0,
                                               baseConfig: baseConfig,
                                               moduleConfig: moduleConfig,
                                               parameterMapper: parameterMapper).generate()
+        } ?? []
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension EventsModuleContextGenerator {
+
+    func tryGetEventsFromService() throws {
+        guard eventCategories == nil else {
+            return
         }
+        self.eventCategories = try service.getEvents()
     }
 
 }

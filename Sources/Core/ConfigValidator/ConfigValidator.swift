@@ -24,9 +24,8 @@ public final class ConfigValidator {
     public func validate() throws {
         try validate(moduleConfig: config.eventsModuleConfig)
         try validate(moduleConfig: config.customEnumModuleConfig)
-        // TODO: validate user properties when they appear
-//        try validate(moduleConfig: config.userPropertiesModuleConfig)
-        try validate(credentialFilePath: config.baseConig.credentialsFilePath)
+        try validateFileExists(filePath: config.baseConfig.credentialsFilePath)
+        try validate(categoriesTemplatePath: config.categoriesExtensionTemplatePath)
     }
 
 }
@@ -39,14 +38,19 @@ private extension ConfigValidator {
         guard let templateFilePath = moduleConfig?.templateFilePath else {
             return
         }
-        guard templateFilePath.isFile else {
-            throw BaseError.fileNotFound(path: templateFilePath)
-        }
+        try validateFileExists(filePath: templateFilePath)
     }
 
-    func validate(credentialFilePath: Path) throws {
-        guard credentialFilePath.isFile else {
-            throw BaseError.fileNotFound(path: credentialFilePath)
+    func validate(categoriesTemplatePath: Path?) throws {
+        guard let categoriesTemplatePathUnwrapped = categoriesTemplatePath else {
+            return
+        }
+        try validateFileExists(filePath: categoriesTemplatePathUnwrapped)
+    }
+
+    func validateFileExists(filePath: Path) throws {
+        guard filePath.isFile else {
+            throw BaseError.fileNotFound(path: filePath)
         }
     }
 

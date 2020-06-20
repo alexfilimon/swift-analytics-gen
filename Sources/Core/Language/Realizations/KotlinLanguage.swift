@@ -13,7 +13,7 @@ public struct KotlinLanguage: Language {
         return "kotlin"
     }
     public var fileExtension: String {
-        return ".kt"
+        return "kt"
     }
 
     public func getDefaultParameterTypeName(by parameterType: ParameterType) -> String? {

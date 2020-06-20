@@ -1,0 +1,48 @@
+import Foundation
+
+{% if description %}/// {{ description }}{% endif %}
+public struct {{ name }}: AnalyticsEvent {
+
+    // MARK: - Private Properties
+
+    private let name: String
+    private let params: [String: Any]
+
+    // MARK: - Initialization
+
+    private init(name: String,
+                 params: [String: Any]) {
+        self.name = name
+        self.params = params
+    }
+
+    // MARK: - AnalyticsEvent
+
+    public func getName(for provider: AnalyticsProvider) -> String {
+        return name
+    }
+
+    public func getParameters(for provider: AnalyticsProvider) -> [String: Any] {
+        return params
+    }
+
+    public func shouldTrack(in provider: AnalyticsProvider) -> Bool {
+        return true
+    }
+
+    // MARK: - Static Methods
+{% for event in events %}
+    {% if event.description %}/// {{ event.description }}{% endif %}
+    {% if event.parameters %}/// - Parameters:{% for parameter in event.parameters %}
+    ///   - {{ parameter.name }}{% if parameter.description %}: {{ parameter.description }}{% endif %}{% endfor %}
+    {% endif %}static func {{ event.name }}({% if event.parameters %}{% for parameter in event.parameters %}{{ parameter.name }}: {{ parameter.type }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}) -> {{ name }} {
+        return .init(
+            name: "{{ event.raw_name }}",
+            params: {% if not event.parameters %}[:]{% else %}[
+                {% for parameter in event.parameters %}"{{ parameter.raw_name }}": {{ parameter.name }}{% if parameter.is_enum %}.rawValue{% endif %}{% if not forloop.last %}, 
+                {% endif %}{% endfor %}
+            ] as [String: Any]{% endif %}
+        )
+    }
+{% endfor %}
+}

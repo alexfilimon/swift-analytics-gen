@@ -13,7 +13,7 @@ public struct SwiftLanguage: Language {
         return "swift"
     }
     public var fileExtension: String {
-        return ".swift"
+        return "swift"
     }
 
     public func getDefaultParameterTypeName(by parameterType: ParameterType) -> String? {

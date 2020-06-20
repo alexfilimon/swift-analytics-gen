@@ -6,7 +6,7 @@
 //
 
 import GoogleTokenProvider
-import Connection
+import SwiftConnection
 import PathKit
 
 /// Class for communicating with google spreadsheet api
@@ -15,7 +15,7 @@ public final class GoogleSpreadsheetService: GoogleSpreadsheetAbstractService {
     // MARK: - Constants
 
     private enum Constants {
-        static let authScopes: [String] = ["https://www.googleapis.com/auth/drive"]
+        static let authScopes: [String] = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
     }
 
     // MARK: - Private Properties
@@ -26,10 +26,17 @@ public final class GoogleSpreadsheetService: GoogleSpreadsheetAbstractService {
 
     /// Base initialization
     /// - Parameter tokenProvider: token provider for authorization
-    public init(creadentialFilePath: Path) throws {
-        let googleTokenProvider = try GoogleTokenProvider(scopes: Constants.authScopes,
-                                                          credentialFilePath: creadentialFilePath)
-        self.connection = .init(tokenProvider: googleTokenProvider)
+    public init(creadentialFilePath: Path,
+                shouldLog: Bool) throws {
+        let googleTokenProvider = try GoogleTokenProvider(
+            scopes: Constants.authScopes,
+            credentialFilePath: creadentialFilePath,
+            shouldLog: shouldLog
+        )
+        self.connection = .init(
+            tokenProvider: googleTokenProvider,
+            shouldLog: shouldLog
+        )
     }
 
     // MARK: - GoogleSpreadsheetAbstractService
