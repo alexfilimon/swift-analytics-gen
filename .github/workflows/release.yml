@@ -7,7 +7,7 @@ on:
 jobs:
   generate:
     name: Create release-artifacts
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
         uses: actions/checkout@master
