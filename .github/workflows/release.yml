@@ -9,6 +9,7 @@ jobs:
     name: Create release-artifacts
     runs-on: ubuntu-latest
     steps:
+      - uses: fwal/setup-swift@v1
       - name: Checkout the repository
         uses: actions/checkout@master
       - name: Generate the artifacts
