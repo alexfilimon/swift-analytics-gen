@@ -10,11 +10,13 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
+      - uses: fwal/setup-swift@v1
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project
         run: |
-          zip --junk-paths my-artifact README.md
+          swift build --configuration release
+          zip --junk-paths AnalyticsGenScript .build/release/AnalyticsGen
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -32,6 +34,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./my-artifact.zip
-          asset_name: myapp_${TAG}.zip
+          asset_path: ./AnalyticsGenScript.zip
+          asset_name: AnalyticsGen_${{ github.ref }}.zip
           asset_content_type: application/zip
