@@ -1,24 +1,37 @@
-name: Release
+name: Upload Release Asset
 
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  generate:
-    name: Create release-artifacts
+  build:
+    name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
-      - uses: fwal/setup-swift@v1
-      - name: Checkout the repository
-        uses: actions/checkout@master
-      - name: Generate the artifacts
-        uses: skx/github-action-build@master
-        with:
-          builder: .github/build
-      - name: Upload the artifacts
-        uses: skx/github-action-publish-binaries@master
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build project
+        run: |
+          zip --junk-paths my-artifact README.md
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: '.build/release/AnalyticsGen'
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: ./my-artifact.zip
+          asset_name: myapp_${TAG}.zip
+          asset_content_type: application/zip
