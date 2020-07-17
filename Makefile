@@ -10,6 +10,8 @@ executable: test
 	git add AnalyticsGen.podspec
 	git commit -m "bumb version $(V)"
 	git push origin
-	pod trunk push --allow-warnings
 	git tag $(V)
 	git push origin $(V)
+
+push_pods:
+	pod trunk push --allow-warnings
