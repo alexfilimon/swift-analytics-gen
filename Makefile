@@ -8,7 +8,7 @@ executable: test
 	git add Sources/AnalyticsGen/Resources/LibConstants.swift
 	git add Docs/integration_guide.md
 	git add AnalyticsGen.podspec
-	git commit -m "bumb version $(V)"
+	git commit --allow-empty -m "bumb version $(V)"
 	git push origin
 	git tag $(V)
 	git push origin $(V)
