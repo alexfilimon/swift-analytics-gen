@@ -33,7 +33,7 @@
 
 ## Installation
 
-1. Add to podfile `pod 'AnalyticsGen', '0.1.2'` or download binary manually from last release
+1. Add to podfile `pod 'AnalyticsGen', '0.1.3'` or download binary manually from last release
 2. Setup calling binary from Makefile (optional)
     1. Fill name command to invoke generator (for example `analytics_gen`)
     2. Fill command to invoke generator
