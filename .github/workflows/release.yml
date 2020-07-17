@@ -8,9 +8,12 @@ on:
 jobs:
   build:
     name: Upload Release Asset
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
-      - uses: fwal/setup-swift@v1
+      - uses: olegtarasov/get-tag@v2
+        id: tagName
+        with:
+          tagRegex: "v(.*)" 
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project
@@ -35,5 +38,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ./AnalyticsGenScript.zip
-          asset_name: AnalyticsGen_${{ github.ref }}.zip
+          asset_name: AnalyticsGen-${{ steps.tagName.outputs.tag }}.zip
           asset_content_type: application/zip
