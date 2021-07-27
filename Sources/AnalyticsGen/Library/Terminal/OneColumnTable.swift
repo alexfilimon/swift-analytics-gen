@@ -6,8 +6,10 @@
 //
 
 import Foundation
-import SPMUtility
-import Basic
+//import SPMUtility
+//import Basic
+import TSCBasic
+import TSCUtility
 
 final class OneColumnTable {
 

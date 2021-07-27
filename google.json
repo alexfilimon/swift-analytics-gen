@@ -1,0 +1,7 @@
+{
+    "client_id": "735253659008-a8e67nmkevnn9hlvb4vrntphdock60gn.apps.googleusercontent.com",
+    "authorize_url": "https://accounts.google.com/o/oauth2/auth",
+    "token_url": "https://oauth2.googleapis.com/token",
+    "client_secret": "jJQNtYskM2R3a7XIwKejmPHs",
+    "callback": "/google/callback"
+}

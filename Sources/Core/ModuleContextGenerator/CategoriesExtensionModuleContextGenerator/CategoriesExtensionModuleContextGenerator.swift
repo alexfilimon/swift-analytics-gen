@@ -37,9 +37,8 @@ public final class CategoriesExtensionModuleContextGenerator: ModuleContextGener
         let categoriesRaw = try CategoryExtensionEventCategoryMapper(categories: categories,
                                                                      language: language,
                                                                      namePostfix: namePostfix).toRaw()
-        let fileName = language.getFinalName(
-            name: "analytics_categories_extension.\(language.fileExtension)",
-            needCapitalizeFirst: true
+        let fileName = language.getFileName(
+            name: "analytics_categories_extension"
         )
         let context = FileContext(
             filePath: categoriesExtensionOutputPath + Path(fileName),

@@ -1,28 +1,28 @@
 language: "swift"
 credentials_file_path: "google.json"
-categories_extension_template_path: "analytics_category_template.stencil"
+categories_extension_template_path: "Templates/ios/analytics_category_template.stencil"
 categories_extension_output_path: "output"
 events_module_config:
   naming_postfix: "event_category"
-  template_file_path: "events_category_template.stencil"
+  template_file_path: "Templates/ios/events_category_template.stencil"
   output_folder_path: "output/EventCategories"
   spreadsheet_config:
-    id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c"
+    id: "1a9UAiDPmVx_5qEv6EIpCzBx-rW64yjxH2Ptpfj6AP3A"
     page_name: "Version_1.0"
     range: "A2:G100"
 user_properties_module_config:
   naming_postfix: ""
-  template_file_path: ""
-  output_folder_path: ""
+  template_file_path: "Templates/ios/user_properties_template.stencil"
+  output_folder_path: "output"
   spreadsheet_config:
-    id: ""
-    page_name: ""
-    range: ""
+    id: "1a9UAiDPmVx_5qEv6EIpCzBx-rW64yjxH2Ptpfj6AP3A"
+    page_name: "UserProps_1.0"
+    range: "A2:C100"
 custom_enum_module_config:
   naming_postfix: "custom_enum"
-  template_file_path: "custom_enums_template.stencil"
+  template_file_path: "Templates/ios/custom_enums_template.stencil"
   output_folder_path: "output/CustomEnums"
   spreadsheet_config:
-    id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c"
+    id: "1a9UAiDPmVx_5qEv6EIpCzBx-rW64yjxH2Ptpfj6AP3A"
     page_name: "Types"
     range: "A2:D100"

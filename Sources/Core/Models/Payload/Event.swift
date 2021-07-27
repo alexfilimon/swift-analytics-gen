@@ -12,6 +12,7 @@ public struct Event: Equatable {
     public let name: String
     public let description: String?
     public let parameters: [Parameter]
+    public let shouldGenerate: Bool
 
     // MARK: - Initialization
 

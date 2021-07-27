@@ -33,7 +33,7 @@
 
 ## Installation
 
-1. Add to podfile `pod 'AnalyticsGen', '0.1.4'` or download binary manually from last release
+1. Add to podfile `pod 'AnalyticsGen', '0.1.4'` or download binary manually from last release (for macOS users) or build source files manually (for ubuntu users)
 2. Setup calling binary from Makefile (optional)
     1. Fill name command to invoke generator (for example `analytics_gen`)
     2. Fill command to invoke generator
@@ -70,13 +70,13 @@ events_module_config:
     page_name: "Version_1.0"
     range: "A2:G100"
 user_properties_module_config:
-  naming_postfix: ""
-  template_file_path: ""
-  output_folder_path: ""
+  naming_postfix: "user_properties"
+  template_file_path: "user_properties_template.stencil"
+  output_folder_path: "output/"
   spreadsheet_config:
-    id: ""
-    page_name: ""
-    range: ""
+    id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c"
+    page_name: "UserProperties_1.0"
+    range: "A2:G100"
 custom_enum_module_config:
   naming_postfix: "custom_enum"
   template_file_path: "custom_enums_template.stencil"
@@ -84,5 +84,5 @@ custom_enum_module_config:
   spreadsheet_config:
     id: "1_w6NmTK4Ju3i2PacB4-D7WCvpWduikBYnvw2PSi2c9c"
     page_name: "Types"
-    range: "A2:D100"
+    range: "A2:D100"`
 ```
