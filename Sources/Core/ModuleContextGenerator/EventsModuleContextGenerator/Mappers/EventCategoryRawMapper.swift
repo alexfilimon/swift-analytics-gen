@@ -13,7 +13,7 @@ final class EventCategoryRawMapper: RawMapper<EventCategory> {
         return [
             "name": baseConfig.language.getFinalName(name: "\(model.name)_\(moduleConfig.namingPostfix)", needCapitalizeFirst: true),
             "description": model.description as Any,
-            "events": try model.events.filter { $0.shouldGenerate }.map {
+            "events": try model.events.map {
                 try EventRawMapper(model: $0, moduleConfig: moduleConfig, baseConfig: baseConfig, parameterMapper: parameterMapper).toRaw()
             }
         ]
