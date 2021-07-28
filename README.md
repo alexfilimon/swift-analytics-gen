@@ -4,7 +4,7 @@
 
 <img src="Resources/logo.png" width="280" center>
 
-The script written in swift. It automatically generate analytics layer for mobile application (support iOS, Andoir, Flutter).
+The script written in swift. It automatically generate analytics layer for mobile application (support iOS, Android, Flutter).
 
 ## Docs
 
