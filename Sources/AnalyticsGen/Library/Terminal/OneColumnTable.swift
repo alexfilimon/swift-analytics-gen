@@ -1,13 +1,13 @@
 //
-//  File.swift
+//  OneColumnTable.swift
 //  
 //
 //  Created by Alexander Filimonov on 26/05/2020.
 //
 
 import Foundation
-import SPMUtility
-import Basic
+import TSCBasic
+import TSCUtility
 
 final class OneColumnTable {
 

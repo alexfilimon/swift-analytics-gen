@@ -12,7 +12,10 @@ public final class CustomEnumVariantRawMapper: RawMapper<CustomEnumVariant> {
 
     override public func toRaw() throws -> [String : Any] {
         return [
-            "name": model.name.snackToCamel(capitalizingFirst: false),
+            "name": baseConfig.language.getFinalName(
+                name: model.name,
+                needCapitalizeFirst: false
+            ),
             "description": model.description as Any,
             "raw_value": model.name
         ]

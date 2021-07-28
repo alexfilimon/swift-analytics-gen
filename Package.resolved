@@ -42,26 +42,17 @@
         "repositoryURL": "https://github.com/apple/swift-argument-parser",
         "state": {
           "branch": null,
-          "revision": "35b76bf577d3cc74820f8991894ce3bcdf024ddc",
-          "version": "0.0.2"
+          "revision": "986d191f94cec88f6350056da59c2e59e83d1229",
+          "version": "0.4.3"
         }
       },
       {
-        "package": "llbuild",
-        "repositoryURL": "https://github.com/apple/swift-llbuild.git",
+        "package": "swift-tools-support-core",
+        "repositoryURL": "https://github.com/apple/swift-tools-support-core",
         "state": {
           "branch": null,
-          "revision": "f73b84bc1525998e5e267f9d830c1411487ac65e",
-          "version": "0.2.0"
-        }
-      },
-      {
-        "package": "SwiftPM",
-        "repositoryURL": "https://github.com/apple/swift-package-manager.git",
-        "state": {
-          "branch": null,
-          "revision": "9abcc2260438177cecd7cf5185b144d13e74122b",
-          "version": "0.5.0"
+          "revision": "3b6b97d612b56e25d80d0807f5bc38ea08b7bdf3",
+          "version": "0.2.3"
         }
       },
       {
@@ -74,7 +65,7 @@
         }
       },
       {
-        "package": "Swifter",
+        "package": "swifter",
         "repositoryURL": "https://github.com/httpswift/swifter.git",
         "state": {
           "branch": null,

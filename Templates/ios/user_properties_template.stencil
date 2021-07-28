@@ -1,0 +1,40 @@
+import AnyAnalytics
+import Foundation
+
+// swiftlint:disable all
+
+public extension AnalyticsManager {
+    func setUserProperty(userProperty: UserProperty) {
+        if userProperty.name == "profile_id" {
+            setUserId(userProperty.value)
+            return
+        }
+        setUserProperty(userProperty)
+    }
+}
+
+public struct UserProperty: BaseAnalyticsProperty {
+
+    // MARK: - Public Properties
+
+    public let name: String
+    public let value: String
+
+    // MARK: - Initialization
+
+    init(name: String, value: String) {
+        self.name = name
+        self.value = value
+    }
+
+    // MARK: - Public Static Methods
+{% for user_property in user_properties %}
+    {% if user_property.description %}/// {{ user_property.description }}
+    {% endif %}public static func {%for part in user_property.name|split:"."%}{% if forloop.last %}{{part}}{% endif %}{% endfor %}(_ value: {{ user_property.parameter.type }}) -> UserProperty {
+        return .init(
+            name: "{{ user_property.raw_name }}",
+            {% if user_property.parameter.raw_type == "string" %}value: value{% elif user_property.parameter.is_enum %}value: value{% if user_property.parameter.is_enum %}.rawValue{% endif %}{% else %}value: String(value){% endif %}
+        )
+    }
+{% endfor %}
+}

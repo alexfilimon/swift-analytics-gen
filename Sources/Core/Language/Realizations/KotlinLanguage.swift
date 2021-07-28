@@ -19,7 +19,7 @@ public struct KotlinLanguage: Language {
     public func getDefaultParameterTypeName(by parameterType: ParameterType) -> String? {
         switch parameterType {
         case .date:
-            return "Date"
+            return "LocalDateTime"
         case .int:
             return "Int"
         case .double:
@@ -31,6 +31,10 @@ public struct KotlinLanguage: Language {
         case .customEnum:
             return nil
         }
+    }
+
+    public func getCustomEnumName(name: String) -> String {
+        return name.uppercased()
     }
 
     public func getFinalName(name: String, needCapitalizeFirst: Bool) -> String {

@@ -5,7 +5,7 @@ Config should be passed as parameter (`configFilePath`) in script. If it will no
 Config format: YAML.
 
 ```yaml
-language: "swift" # (required) swift or kotlin (any language could be added by creating another struct, that conforms to Language protocol)
+language: "swift" # (required) swift, kotlin or dart (any language could be added by creating another struct, that conforms to Language protocol)
 credentials_file_path: "google.json" # (required) path to file, when google creadentials are located
 categories_extension_template_path: "analytics_category_template.stencil" # (optional) path to template file for category extension
 categories_extension_output_path: "output" # (optional) category extension output path

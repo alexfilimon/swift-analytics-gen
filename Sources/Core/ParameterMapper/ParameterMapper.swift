@@ -11,7 +11,7 @@ public final class ParameterMapper {
 
     // MARK: - Private Properties
 
-    private let customEnumNameGettable: CustomEnumNameGettable
+    private let customEnumNameGettable: CustomEnumNameGettable?
     private let language: Language
 
     // MARK: - Initialization
@@ -20,7 +20,7 @@ public final class ParameterMapper {
     /// - Parameters:
     ///   - customEnumNameGettable: entity for getting names of customEnums
     ///   - language: language to use
-    public init(customEnumNameGettable: CustomEnumNameGettable,
+    public init(customEnumNameGettable: CustomEnumNameGettable?,
                 language: Language) {
         self.customEnumNameGettable = customEnumNameGettable
         self.language = language
@@ -31,13 +31,24 @@ public final class ParameterMapper {
     /// Mapping method
     /// - Parameter parameter: parameter that need to be translating
     public func map(parameter: Parameter) throws -> [String: Any] {
-        let (isEnum, typeName) = try getParatemerName(parameter: parameter)
+        let (isEnum, typeName) = try getParatemerName(parameterType: parameter.type)
         return [
-            "name": parameter.name.snackToCamel(capitalizingFirst: false),
+            "name": language.getFinalName(name: parameter.name, needCapitalizeFirst: false),
             "raw_name": parameter.name,
             "description": parameter.description as Any,
             "is_enum": isEnum,
             "type": typeName
+        ]
+    }
+
+    /// Mapping method
+    /// - Parameter parameterType: type of parameter that need to be translated
+    public func map(parameterType: ParameterType) throws -> [String: Any] {
+        let (isEnum, typeName) = try getParatemerName(parameterType: parameterType)
+        return [
+            "is_enum": isEnum,
+            "type": typeName,
+            "raw_type": parameterType.stringValue()
         ]
     }
 
@@ -47,11 +58,23 @@ public final class ParameterMapper {
 
 private extension ParameterMapper {
 
-    func getParatemerName(parameter: Parameter) throws -> (isEnum: Bool, typeName: String) {
-        if let defaultParam = language.getDefaultParameterTypeName(by: parameter.type) {
+    func getParatemerName(parameterType: ParameterType) throws -> (isEnum: Bool, typeName: String) {
+        // try to get default parameter's name
+        if let defaultParam = language.getDefaultParameterTypeName(by: parameterType) {
             return (isEnum: false, typeName: defaultParam)
         }
-        return (isEnum: true, typeName: try customEnumNameGettable.getFinalName(forName: parameter.type.stringValue()))
+
+        // try to get custom enum's name
+        let parameterStringValue = parameterType.stringValue()
+        guard let customEnumNameGettable = customEnumNameGettable else {
+            throw ParameterMapperError.thereIsNoEnumGettable(forEnum: parameterStringValue)
+        }
+        return (
+            isEnum: true,
+            typeName: try customEnumNameGettable.getFinalName(
+                forName: parameterStringValue
+            )
+        )
     }
 
 }
