@@ -9,7 +9,7 @@ events_module_config:
   spreadsheet_config:
     id: "1a9UAiDPmVx_5qEv6EIpCzBx-rW64yjxH2Ptpfj6AP3A"
     page_name: "Version_1.0"
-    range: "A2:G100"
+    range: "A2:H100"
 user_properties_module_config:
   naming_postfix: ""
   template_file_path: "Templates/ios/user_properties_template.stencil"

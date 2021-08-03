@@ -47,11 +47,14 @@ public final class EventsModuleContextGenerator: ModuleContextGenerator {
     /// Method for generating constexts
     public func generate() throws -> [FileContext] {
         try tryGetEventsFromService()
-        return try eventCategories?.map {
-            try EventCategoryContextGenerator(input: $0,
-                                              baseConfig: baseConfig,
-                                              moduleConfig: moduleConfig,
-                                              parameterMapper: parameterMapper).generate()
+        return try eventCategories?.compactMap {
+            guard $0.events.contains(where: { $0.shouldGenerate }) else {
+                return nil
+            }
+            return try EventCategoryContextGenerator(input: $0,
+                                                     baseConfig: baseConfig,
+                                                     moduleConfig: moduleConfig,
+                                                     parameterMapper: parameterMapper).generate()
         } ?? []
     }
 

@@ -39,8 +39,8 @@ final class SpreadsheetPayloadParserTest: XCTestCase {
                         .init(name: "event_1", description: nil, parameters: [
                             .init(name: "param_1_name", description: "param_1 description", type: .string),
                             .init(name: "param_2_name", description: "param_2 description", type: .int)
-                        ]),
-                        .init(name: "event_2", description: "event_2 description", parameters: [])
+                        ], shouldGenerate: true),
+                        .init(name: "event_2", description: "event_2 description", parameters: [], shouldGenerate: true)
                     ])
                 ]
                 let spreadsheetParser = SpreadsheetEventsParser(spreadsheet: spreadsheet)
