@@ -40,6 +40,8 @@ jobs:
           asset_path: ./AnalyticsGen.zip
           asset_name: AnalyticsGen-${{ steps.tagName.outputs.tag }}.zip
           asset_content_type: application/zip
-      - name: Upload pod info
+      - name: Publish to CocoaPods
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
         run: |
-          pod trunk push --allow-warnings
+          pod trunk push AnalyticsGen.podspec --allow-warnings
