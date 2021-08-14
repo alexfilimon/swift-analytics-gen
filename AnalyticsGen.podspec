@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name           = 'AnalyticsGen'
-  s.version        = '0.2.0'
+  s.version        = '0.2.1'
   s.summary        = 'Command line tool for generating analytics layer'
   s.homepage       = 'https://github.com/alexfilimon/swift-analytics-gen'
   s.source         = { http: "#{s.homepage}/releases/download/#{s.version}/AnalyticsGen-#{s.version}.zip" }
