@@ -48,6 +48,7 @@ For filling events there is page (default name is `Version_1.0`).
 - Parameter name
 - Parameter type - supports [default types](#Default-types) and [custom types](#Custom-types)
 - Parameter description (comment in code will be generated)
+- Should Generate checkbox. The event will not be generated if the value is `false`. The category file will be generated only if the category has at least one event that should be generated.
 
 ## User properties
 
