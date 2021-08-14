@@ -4,16 +4,16 @@ import Foundation
 // swiftlint:disable all
 
 public extension AnalyticsManager {
-    func setUserProperty(userProperty: UserProperty) {
+    func set(userProperty: UserProperty) {
         if userProperty.name == "profile_id" {
-            setUserId(userProperty.value)
+            set(userId: userProperty.value)
             return
         }
-        setUserProperty(userProperty)
+        set(userProperty: userProperty)
     }
 }
 
-public struct UserProperty: BaseAnalyticsProperty {
+public struct UserProperty: BaseAnalyticsUserProperty {
 
     // MARK: - Public Properties
 

@@ -29,7 +29,7 @@ let package = Package(
         .target(
             name: "AnalyticsGen",
             dependencies: ["Core",
-                           "PathKit", "ArgumentParser", "SwiftToolsSupport"]),
+                           "PathKit", "ArgumentParser", "SwiftToolsSupport-auto"]),
         .target(
             name: "Core",
             dependencies: ["NetworkService",
