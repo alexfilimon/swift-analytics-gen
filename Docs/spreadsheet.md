@@ -39,8 +39,6 @@ Script supports default types:
 
 For filling events there is page (default name is `Version_1.0`).
 
-The main feature of this page is that you can create multiple versions of page. After working on new version just say developers to rename parameter in config to newer page version.
-
 **There are colums:**
 
 - Category - category of event (to group similar events). If you don't want to group, just name this column `Base`
@@ -50,6 +48,16 @@ The main feature of this page is that you can create multiple versions of page. 
 - Parameter name
 - Parameter type - supports [default types](#Default-types) and [custom types](#Custom-types)
 - Parameter description (comment in code will be generated)
+
+## User properties
+
+For filling user properties there is page (default name is `UserProps_1.0`).
+
+**There are colums:**
+
+- UserProps name
+- UserProps Description (comment in code will be generated)
+- Parameter type - supports [default types](#Default-types) and [custom types](#Custom-types)
 
 ## Integration
 
@@ -62,3 +70,7 @@ To fill config you need to know:
 To found table identifier just research URL of page - `https://docs.google.com/spreadsheets/d/{spreadsheet_id}/edit#gid=0`.
 
 For example `https://docs.google.com/spreadsheets/d/abc1234567/edit#gid=0` - identifier here is `abc1234567`
+
+## Versioning
+
+One of feature of table is that you can create multiple versions of page. After working on new version just say developers to rename parameter in config to newer page version.

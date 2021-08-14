@@ -13,6 +13,7 @@ public enum BaseError: LocalizedError {
     case folderNotFound(folderName: String)
     case unknownLanguage
     case unknownError
+    case wrongValue(message: String?)
 
     // MARK: - LocalizedError
 
@@ -26,6 +27,8 @@ public enum BaseError: LocalizedError {
             return "Unknown language"
         case .unknownError:
             return "Unknown error"
+        case .wrongValue(let message):
+            return "Wrong value: \(message ?? "nil")"
         }
     }
 

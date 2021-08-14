@@ -1,12 +1,12 @@
 //
-//  File.swift
+//  StepsPrinter.swift
 //  
 //
 //  Created by Alexander Filimonov on 26/05/2020.
 //
 
 import Foundation
-import Basic
+import TSCBasic
 
 final class StepsPrinter {
 

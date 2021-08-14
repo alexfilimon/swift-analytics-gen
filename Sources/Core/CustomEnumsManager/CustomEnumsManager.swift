@@ -12,14 +12,14 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
 
     // MARK: - Private Properties
 
-    private let moduleConfig: ModuleConfig?
+    private let moduleConfig: ModuleConfig
     private let baseConfig: BaseConfig
     private let customEnumsService: CustomEnumsAbstractService
     private var customEnums: [CustomEnum] = []
 
     // MARK: - Initialization
 
-    public init(moduleConfig: ModuleConfig?,
+    public init(moduleConfig: ModuleConfig,
                 baseConfig: BaseConfig,
                 customEnumsService: CustomEnumsAbstractService) throws {
         self.moduleConfig = moduleConfig
@@ -36,24 +36,21 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
     // MARK: - CustomEnumNameGettable
 
     public func getFinalName(forName customEnumName: String) throws -> String {
-        guard
-            let moduleConfig = moduleConfig,
-            let customEnum = customEnums.first(where: { $0.name == customEnumName })
-        else {
+        guard let customEnum = customEnums.first(where: { $0.name == customEnumName }) else {
             throw CustomEnumsManagerError.enumDoesentExists(enumName: customEnumName)
         }
-        return "\(customEnum.name)_\(moduleConfig.namingPostfix)".snackToCamel(capitalizingFirst: true)
+        return baseConfig.language.getCustomEnumName(
+            name: "\(customEnum.name)_\(moduleConfig.namingPostfix)"
+        )
     }
 
     // MARK: - ModuleContextGenerator
 
     public func generate() throws -> [FileContext] {
-        guard let moduleConfig = moduleConfig else {
-            return []
-        }
         return try customEnums.map {
-            let fileName = baseConfig.language.getFinalName(name: "\($0.name)_\(moduleConfig.namingPostfix).\(baseConfig.language.fileExtension)",
-                needCapitalizeFirst: true)
+            let fileName = baseConfig.language.getFileName(
+                name: "\($0.name)_\(moduleConfig.namingPostfix)"
+            )
             return FileContext(
                 filePath: moduleConfig.outputFolderPath + Path(fileName),
                 templateFilePath: moduleConfig.templateFilePath,

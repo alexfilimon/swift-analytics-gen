@@ -1,6 +1,6 @@
 # Templates
 
-## Creted template
+## Created template (outdated)
 
 There are already swift/kotlin templates in folders `Templates/ios/`, `Templates/android/`
 
@@ -10,4 +10,4 @@ There are already swift/kotlin templates in folders `Templates/ios/`, `Templates
 
 ## Creating template
 
-You can create your own template, tah will use existance payload. 
+You can create your own template, that will use existence payload.

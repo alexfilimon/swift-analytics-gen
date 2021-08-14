@@ -5,7 +5,7 @@
 //  Created by Alexander Filimonov on 06/03/2020.
 //
 
-/// Abstract class for translating soma payload to raw
+/// Abstract class for translating some payload to raw representation
 public class RawMapper<Model>: RawMappable {
 
     // MARK: - Private Properties

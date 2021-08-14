@@ -8,7 +8,7 @@
 import PathKit
 
 /// Class for generating contexts for single eventCategory
-final class EventCategoryContextGenerator {
+public final class EventCategoryContextGenerator {
 
     // MARK: - Private Properties
 
@@ -32,9 +32,8 @@ final class EventCategoryContextGenerator {
     // MARK: - Public Methods
 
     public func generate() throws -> FileContext {
-        let fileName = baseConfig.language.getFinalName(
-            name: "\(input.name)_\(moduleConfig.namingPostfix).\(baseConfig.language.fileExtension)",
-            needCapitalizeFirst: true
+        let fileName = baseConfig.language.getFileName(
+            name: "\(input.name)_\(moduleConfig.namingPostfix)"
         )
         return FileContext(
             filePath: moduleConfig.outputFolderPath + Path(fileName),

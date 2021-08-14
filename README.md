@@ -1,6 +1,12 @@
-# Project for generating analytics layer in mobile app
+# CLI for generating analytics layer in mobile app
 
-The script written in swift is used to automatically generate the analytics layer for mobile application (both iOS and android).
+![](https://img.shields.io/cocoapods/v/AnalyticsGen?style=plastic)
+
+<img src="Resources/logo.png" width="280" center>
+
+The script written in swift. It automatically generate analytics layer for mobile application (support iOS, Android, Flutter).
+
+## Docs
 
 [Integration](Docs/integration_guide.md)
 
@@ -14,18 +20,6 @@ The script written in swift is used to automatically generate the analytics laye
 
 [Common problems](Docs/common_problems.md)
 
+[Developing](Docs/developing.md)
+
 [Release](Docs/release.md)
-
-## Modularity
-
-![Modularity diagram](Resources/Modularity.png)
-
-## Base architecture
-
-![architecture diagram](Resources/BaseClassDiagram.png)
-
-## GoogleTokenProvider
-
-Provider for authorizing user via google with Google OAuth 2.0
-
-![Provider diagram](Resources/GoogleTokenProviderDiagram.png)

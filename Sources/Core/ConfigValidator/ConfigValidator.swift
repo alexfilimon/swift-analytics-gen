@@ -24,6 +24,7 @@ public final class ConfigValidator {
     public func validate() throws {
         try validate(moduleConfig: config.eventsModuleConfig)
         try validate(moduleConfig: config.customEnumModuleConfig)
+        try validate(moduleConfig: config.userPropertiesModuleConfig)
         try validateFileExists(filePath: config.baseConfig.credentialsFilePath)
         try validate(categoriesTemplatePath: config.categoriesExtensionTemplatePath)
     }
@@ -35,10 +36,23 @@ public final class ConfigValidator {
 private extension ConfigValidator {
 
     func validate(moduleConfig: ModuleConfig?) throws {
-        guard let templateFilePath = moduleConfig?.templateFilePath else {
+        guard let moduleConfig = moduleConfig else {
             return
         }
-        try validateFileExists(filePath: templateFilePath)
+        try validate(spreadsheetConfig: moduleConfig.spreadsheetConfig)
+        try validateFileExists(filePath: moduleConfig.templateFilePath)
+    }
+
+    func validate(spreadsheetConfig: SpreadsheetConfig) throws {
+        if (spreadsheetConfig.id.nilIfEmpty() == nil) {
+            throw BaseError.wrongValue(message: "id is empty")
+        }
+        if (spreadsheetConfig.pageName.nilIfEmpty() == nil) {
+            throw BaseError.wrongValue(message: "pageName is empty")
+        }
+        if (spreadsheetConfig.range.nilIfEmpty() == nil) {
+            throw BaseError.wrongValue(message: "range is empty")
+        }
     }
 
     func validate(categoriesTemplatePath: Path?) throws {

@@ -1,3 +1,8 @@
+# Before release
+
+1. All TODO's are deleted
+2. Script successfully bulding and running (delete `output` folder and check if it exists after running)
+
 # Release
 
 1. Bump version

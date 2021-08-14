@@ -1,3 +1,5 @@
+// swiftlint:disable all
+
 {% if description %}/// {{ description }}{% endif %}
 public enum {{ name }}: String {
     {% for variant in variants %}

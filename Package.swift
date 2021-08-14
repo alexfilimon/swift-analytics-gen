@@ -21,15 +21,15 @@ let package = Package(
         .package(url: "https://github.com/kylef/Stencil.git", from: "0.13.1"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "2.0.0"),
         .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.4.7")),
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.2"),
-        .package(url: "https://github.com/apple/swift-package-manager.git", from: "0.5.0"),
-        .package(url: "https://github.com/kylef/Spectre.git", from: "0.9.0")
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.4.3"),
+        .package(url: "https://github.com/kylef/Spectre.git", from: "0.9.0"),
+        .package(url: "https://github.com/apple/swift-tools-support-core", from: "0.2.3"),
     ],
     targets: [
         .target(
             name: "AnalyticsGen",
             dependencies: ["Core",
-                           "PathKit", "ArgumentParser", "SPMUtility"]),
+                           "PathKit", "ArgumentParser", "SwiftToolsSupport"]),
         .target(
             name: "Core",
             dependencies: ["NetworkService",

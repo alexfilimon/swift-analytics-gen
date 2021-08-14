@@ -11,7 +11,8 @@ public enum AllLanguages {
     static var list: [Language] {
         return [
             SwiftLanguage(),
-            KotlinLanguage()
+            KotlinLanguage(),
+            DartLanguage()
         ]
     }
 

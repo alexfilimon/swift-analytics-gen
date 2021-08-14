@@ -73,3 +73,6 @@ fastlane/test_output
 .idea/
 Frameworks/
 Rome/
+
+# config
+google.json
