@@ -34,12 +34,14 @@ final class SpreadsheetEventsParser {
             let currentParameterName = row[safe: 4]?.nilIfEmpty()
             let currentParameterType = row[safe: 5]?.nilIfEmpty()
             let currentParameterDescription = row[safe: 6]?.nilIfEmpty()
+            let currentEvenShouldGenerate = row[safe: 7]?.boolValue() ?? true
 
             if let currentCategoryNameUnwrapped = currentCategoryName {
                 if let parameterUnwrapped = parameter, let eventUnwrapped = event {
                     event = .init(name: eventUnwrapped.name,
                                   description: eventUnwrapped.description,
-                                  parameters: eventUnwrapped.parameters + [parameterUnwrapped])
+                                  parameters: eventUnwrapped.parameters + [parameterUnwrapped],
+                                  shouldGenerate: eventUnwrapped.shouldGenerate)
                     parameter = nil
                 }
                 if let eventUnwrapped = event, let categoryUnwrapped = category {
@@ -61,7 +63,8 @@ final class SpreadsheetEventsParser {
                 if let parameterUnwrapped = parameter, let eventUnwrapped = event {
                     event = .init(name: eventUnwrapped.name,
                                   description: eventUnwrapped.description,
-                                  parameters: eventUnwrapped.parameters + [parameterUnwrapped])
+                                  parameters: eventUnwrapped.parameters + [parameterUnwrapped],
+                                  shouldGenerate: eventUnwrapped.shouldGenerate)
                     parameter = nil
                 }
                 if let eventUnwrapped = event, let categoryUnwrapped = category {
@@ -72,7 +75,8 @@ final class SpreadsheetEventsParser {
                 }
                 event = .init(name: currentEventNameUnwrapped,
                               description: currentEventDescription,
-                              parameters: [])
+                              parameters: [],
+                              shouldGenerate: currentEvenShouldGenerate)
             }
 
             if
@@ -82,7 +86,8 @@ final class SpreadsheetEventsParser {
                 if let parameterUnwrapped = parameter, let eventUnwrapped = event {
                     event = .init(name: eventUnwrapped.name,
                                   description: eventUnwrapped.description,
-                                  parameters: eventUnwrapped.parameters + [parameterUnwrapped])
+                                  parameters: eventUnwrapped.parameters + [parameterUnwrapped],
+                                  shouldGenerate: eventUnwrapped.shouldGenerate)
                     parameter = nil
                 }
                 parameter = .init(name: currentParameterNameUnwrapped,
@@ -95,7 +100,8 @@ final class SpreadsheetEventsParser {
         if let parameterUnwrapped = parameter, let eventUnwrapped = event {
             event = .init(name: eventUnwrapped.name,
                           description: eventUnwrapped.description,
-                          parameters: eventUnwrapped.parameters + [parameterUnwrapped])
+                          parameters: eventUnwrapped.parameters + [parameterUnwrapped],
+                          shouldGenerate: eventUnwrapped.shouldGenerate)
             parameter = nil
         }
         if let eventUnwrapped = event, let categoryUnwrapped = category {

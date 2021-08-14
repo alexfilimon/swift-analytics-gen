@@ -34,4 +34,15 @@ public extension String {
         return isEmpty ? nil : self
     }
 
+    /// Method that converts string to bool
+    func boolValue() -> Bool? {
+        if self.lowercased() == "true" {
+            return true
+        } else if self.lowercased() == "false" {
+            return false
+        } else {
+            return nil
+        }
+    }
+
 }
