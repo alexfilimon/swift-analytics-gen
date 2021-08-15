@@ -20,6 +20,8 @@ public struct Config {
 
     public let categoriesExtensionTemplatePath: Path?
     public let categoriesExtensionOutputPath: Path?
+    
+    public let shouldRemoveOldFilesBeforeGenerating: Bool
 
     // MARK: - Initialization
 
@@ -28,7 +30,8 @@ public struct Config {
                 userPropertiesModuleConfig: ModuleConfig?,
                 baseConfig: BaseConfig,
                 categoriesExtensionTemplatePath: String?,
-                categoriesExtensionOutputPath: String?) {
+                categoriesExtensionOutputPath: String?,
+                shouldRemoveOldFilesBeforeGenerating: Bool?) {
         self.eventsModuleConfig = eventsModuleConfig
         self.userPropertiesModuleConfig = userPropertiesModuleConfig
         self.customEnumModuleConfig = customEnumModuleConfig
@@ -40,6 +43,7 @@ public struct Config {
         self.categoriesExtensionOutputPath = categoriesExtensionOutputPath == nil
             ? nil
             : Path(categoriesExtensionOutputPath!)
+        self.shouldRemoveOldFilesBeforeGenerating = shouldRemoveOldFilesBeforeGenerating ?? true
     }
     
 }

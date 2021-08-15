@@ -15,6 +15,7 @@ struct ConfigYamlEntry: Codable {
     let language: String
     let categories_extension_template_path: String?
     let categories_extension_output_path: String?
+    let should_remove_old_files_before_generating: Bool?
 }
 
 extension ConfigYamlEntry: EntityEncodable {
@@ -26,7 +27,8 @@ extension ConfigYamlEntry: EntityEncodable {
                      baseConfig: .init(credentialsFilePath: .init(credentials_file_path),
                                        language: try LanguageParser(rawName: language).parse()),
                      categoriesExtensionTemplatePath: categories_extension_template_path,
-                     categoriesExtensionOutputPath: categories_extension_output_path)
+                     categoriesExtensionOutputPath: categories_extension_output_path,
+                     shouldRemoveOldFilesBeforeGenerating: should_remove_old_files_before_generating)
     }
 
 }

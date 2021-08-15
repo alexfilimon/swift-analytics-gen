@@ -11,9 +11,9 @@ events_module_config:
     page_name: "Version_1.0"
     range: "A2:G100"
 user_properties_module_config:
-  naming_postfix: ""
+  naming_postfix: "user_properties"
   template_file_path: "Templates/ios/user_properties_template.stencil"
-  output_folder_path: "output"
+  output_folder_path: "output/UserProperties"
   spreadsheet_config:
     id: "1a9UAiDPmVx_5qEv6EIpCzBx-rW64yjxH2Ptpfj6AP3A"
     page_name: "UserProps_1.0"
@@ -26,3 +26,4 @@ custom_enum_module_config:
     id: "1a9UAiDPmVx_5qEv6EIpCzBx-rW64yjxH2Ptpfj6AP3A"
     page_name: "Types"
     range: "A2:D100"
+should_remove_old_files_before_generating: true
