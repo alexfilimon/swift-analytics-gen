@@ -11,7 +11,10 @@ final class EventCategoryRawMapper: RawMapper<EventCategory> {
 
     override public func toRaw() throws -> [String : Any] {
         return [
-            "name": baseConfig.language.getFinalName(name: "\(model.name)_\(moduleConfig.namingPostfix)", needCapitalizeFirst: true),
+            "name": baseConfig.language.getFinalName(
+                name: "\(model.name)_\(moduleConfig.namingPostfix)",
+                needCapitalizeFirst: true
+            ),
             "description": model.description as Any,
             "events": try model.events.map {
                 try EventRawMapper(model: $0, moduleConfig: moduleConfig, baseConfig: baseConfig, parameterMapper: parameterMapper).toRaw()

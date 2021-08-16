@@ -16,6 +16,7 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
     private let baseConfig: BaseConfig
     private let customEnumsService: CustomEnumsAbstractService
     private var customEnums: [CustomEnum] = []
+    private var customEnumsUsage: [String: Bool] = [:]
 
     // MARK: - Initialization
 
@@ -31,6 +32,7 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
 
     public func prepareForUse() throws {
         self.customEnums = try customEnumsService.getCustomEnums()
+        self.customEnumsUsage = [:]
     }
 
     // MARK: - CustomEnumNameGettable
@@ -39,6 +41,7 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
         guard let customEnum = customEnums.first(where: { $0.name == customEnumName }) else {
             throw CustomEnumsManagerError.enumDoesentExists(enumName: customEnumName)
         }
+        customEnumsUsage[customEnum.name] = true
         return baseConfig.language.getCustomEnumName(
             name: "\(customEnum.name)_\(moduleConfig.namingPostfix)"
         )
@@ -47,7 +50,10 @@ public final class CustomEnumsManager: ModuleContextGenerator, CustomEnumNameGet
     // MARK: - ModuleContextGenerator
 
     public func generate() throws -> [FileContext] {
-        return try customEnums.map {
+        return try customEnums.compactMap {
+            guard customEnumsUsage[$0.name] == true else {
+                return nil
+            }
             let fileName = baseConfig.language.getFileName(
                 name: "\($0.name)_\(moduleConfig.namingPostfix)"
             )

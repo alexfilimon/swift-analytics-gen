@@ -34,7 +34,7 @@ public final class UserPropertiesContextGenerator {
 
     public func generate() throws -> FileContext {
         let fileName = baseConfig.language.getFileName(
-            name: "user_properties"
+            name: moduleConfig.namingPostfix
         )
         return FileContext(
             filePath: moduleConfig.outputFolderPath + Path(fileName),

@@ -16,8 +16,8 @@ public struct CustomEnum: Equatable {
     // MARK: - Initialization
 
     public init(name: String,
-            description: String?,
-            variants: [CustomEnumVariant]) {
+                description: String?,
+                variants: [CustomEnumVariant]) {
         self.name = name
         self.description = description
         self.variants = variants

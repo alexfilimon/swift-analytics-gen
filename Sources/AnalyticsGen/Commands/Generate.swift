@@ -36,7 +36,7 @@ struct Generate: Decodable, ParsableCommand {
 
     func run() throws {
         let tc = TerminalController(stream: stdoutStream)
-        let stepsPrinter = StepsPrinter(tc: tc, color: .green, stepsCount: 6)
+        let stepsPrinter = StepsPrinter(tc: tc, color: .green, stepsCount: 7)
 
         do {
             printDataAboutScript(into: tc)
@@ -48,10 +48,33 @@ struct Generate: Decodable, ParsableCommand {
             let config = try YamlConfigParser(configFilePath: configFilePath).parse()
             stepsPrinter.add("Validating config file")
             try ConfigValidator(config: config).validate()
+            
+            // Remove old files if needed
+            stepsPrinter.add("Removing old files if needed")
+            if config.shouldRemoveOldFilesBeforeGenerating {
+                // remove module configs output paths
+                let moduleConfigs = [
+                    config.userPropertiesModuleConfig,
+                    config.eventsModuleConfig,
+                    config.customEnumModuleConfig
+                ].compactMap { $0 }
+                for moduleConfig in moduleConfigs {
+                    if moduleConfig.outputFolderPath.isDirectory {
+                        try moduleConfig.outputFolderPath.delete()
+                    }
+                }
+                
+                if
+                    let categoriesExtensionOutputPath = config.categoriesExtensionOutputPath,
+                    categoriesExtensionOutputPath.isFile
+                {
+                    try categoriesExtensionOutputPath.delete()
+                }
+            }
 
             // Custom enums
             stepsPrinter.add("Preparing custom enums")
-            let (parameterMapper, moduleContextGenerator) = try prepareCustomEnumsManager(
+            let (parameterMapper, customEnumsModuleContextGenerator) = try prepareCustomEnumsManager(
                 baseConfig: config.baseConfig,
                 moduleConfig: config.customEnumModuleConfig
             )
@@ -77,9 +100,9 @@ struct Generate: Decodable, ParsableCommand {
             // Generate all file contexts
             stepsPrinter.add("Generating files")
             let allGenerators: [[ModuleContextGenerator?]] = [
-                [moduleContextGenerator],
                 eventsModuleConfigGenerators,
-                [userPropertiesModuleContextGenerator]
+                [userPropertiesModuleContextGenerator],
+                [customEnumsModuleContextGenerator]
             ]
             let allGenerarorsFlat = allGenerators.flatMap { $0 }.compactMap { $0 }
             let allContexts = try allGenerarorsFlat.flatMap { try $0.generate() }
