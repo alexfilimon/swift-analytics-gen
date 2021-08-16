@@ -110,6 +110,8 @@ final class CustomEnumsManagerTests: XCTestCase {
                 customEnumsService: customEnumService
             )
             try manager.prepareForUse()
+            let _ = try manager.getFinalName(forName: "payment_state")
+            let _ = try manager.getFinalName(forName: "server_status")
 
             let fileContexts = try manager.generate()
             let expectedFileContexts = customEnumService.getFileContextsForKotlin(postfix: moduleConfig.namingPostfix)
@@ -142,6 +144,8 @@ final class CustomEnumsManagerTests: XCTestCase {
                 customEnumsService: customEnumService
             )
             try manager.prepareForUse()
+            let _ = try manager.getFinalName(forName: "payment_state")
+            let _ = try manager.getFinalName(forName: "server_status")
 
             let fileContexts = try manager.generate()
             let expected = customEnumService.getFileContextsForSwift(postfix: moduleConfig.namingPostfix)
