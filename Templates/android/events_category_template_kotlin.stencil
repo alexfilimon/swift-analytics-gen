@@ -3,7 +3,7 @@ import ru.surfstudio.android.analytics.event.Event
 {% if description %}/**
 * Описание: {{ description }}
 */
-{{ description }}{% endif %}object {{ name }}{{ postfix }} {
+{% endif %}object {{ name }}{{ postfix }} {
     {% for event in events %}
     {% if event.description %}/**
      * Описание: {{ event.description }}{% if event.parameters %}
